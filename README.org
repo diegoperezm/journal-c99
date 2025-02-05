@@ -1,0 +1,28 @@
+* journal-c99
+> A simple personal productivity app to track time spent on each project
+
+> 🚧 Work in progress 🚧
+
+* Dependencies
+
+  - raylib
+  - raygui
+  
+* Features
+ - Root/Today screen
+ - Select a project screen
+ - Set Start and End field (hh:mm)
+ - Graph screen 
+ - Year screen 
+ - Month screen 
+ - Day screen
+ - Today screen 
+
+* Getting started 
+
+ Lorem 
+
+# Live Demo
+
+ Lorem
+
