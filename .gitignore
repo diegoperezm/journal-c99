@@ -123,4 +123,6 @@ tags
 # Persistent undo
 [._]*.un~
 
+# Project
+build/
 
