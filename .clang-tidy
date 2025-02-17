@@ -1,0 +1,53 @@
+Checks: >
+  -*,
+  bugprone-*,
+  cert-*,
+  clang-analyzer-*,
+  performance-const-string-ref,
+  performance-inefficient-vector-operation,
+  performance-unnecessary-value-param,
+  performance-unnecessary-copy-initialization,
+  portability-*,
+  readability-implicit-bool-conversion,
+  readability-uppercase-literal-suffix,
+  readability-redundant-control-flow,
+  readability-redundant-declaration,
+  readability-redundant-function-ptr-dereference,
+  readability-container-size-empty,
+  readability-uppercase-literal-suffix,
+  readability-redundant-function-ptr-dereference,
+  readability-redundant-member-init,
+  readability-inconsistent-declaration-parameter-name,
+  readability-misleading-indentation,
+  readability-redundant-string-init,
+  readability-simplify-boolean-expr,
+  readability-string-compare,
+  readability-else-after-return,
+  readability-function-cognitive-complexity,
+  misc-*,
+  - clang-diagnostic-unused-variable,
+  -misc-unused-parameters,
+  -bugprone-easily-swappable-parameters,
+  -expected_unqualified_id
+
+WarningsAsErrors: '*'
+
+ExtraArgs:
+  - -std=c99
+  - -Wall
+  - -Werror
+  - -Wextra
+  - -Wpedantic
+  - -Wshadow
+  - -Wconversion
+  - -Wstrict-prototypes
+  - -Wmissing-prototypes
+  - -Wmissing-declarations
+  - -Wold-style-definition
+  - -Wfloat-equal
+
+HeaderFilterRegex: '.*'
+
+FormatStyle: file
+
+

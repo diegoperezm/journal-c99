@@ -20,7 +20,25 @@
 
 * Getting started 
 
- Lorem 
+install raylib:  
+
+ - Macos:
+
+#+begin_src  sh 
+brew install raylib 
+#+end_src 
+
+install raygui:
+
+ - Macos: 
+
+#+begin_src  sh 
+cd include && \
+wget https://github.com/raysan5/raygui/tree/master/src/raygui.h
+#+end_src 
+
+
+
 
 # Live Demo
 
