@@ -1,30 +1,37 @@
 #include "../include/raygui.h"
+#include "../include/utils.h"
 #include <raylib.h>
-#include <stdio.h>
+// #include <stdio.h>
+#define MIN_WIDTH 200
+#define MIN_HEIGHT 200
 
 int main(void) {
 
-  float screenW = 600.0F;
-  float screenH = 600.0F;
+  int screenW = 800;
+  int screenH = 600;
 
-  InitWindow((int)screenW, (int)screenH, "Media Player");
-
-  Rectangle textBox = { screenW / 2.0F - 100, 180, 225, 50 };
+  SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+  InitWindow(screenW, screenH, "Media Player");
 
   SetTargetFPS(20);
 
   while (!WindowShouldClose()) {
+    // Get updated screen size
+    int width = GetScreenWidth();
+    int height = GetScreenHeight();
 
     // Begin
     BeginDrawing();
+
     ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
-    DrawRectangleRec(textBox, LIGHTGRAY);
+    DrawText("Calendario", 350, 50, 20, DARKGRAY);
+
+    GridLayout(width, height);
+
     EndDrawing();
     // End
   }
 
   CloseWindow();
   return EXIT_SUCCESS;
-
-  printf("Hello, world.");
 }
