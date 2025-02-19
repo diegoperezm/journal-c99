@@ -12,8 +12,9 @@ int main(void) {
 
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);
   InitWindow(screenW, screenH, "Media Player");
-
   SetTargetFPS(20);
+
+  GuiLoadStyle("../resources/cyber.rgs");
 
   while (!WindowShouldClose()) {
     // Get updated screen size
@@ -24,7 +25,8 @@ int main(void) {
     BeginDrawing();
 
     ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
-    DrawText("Calendario", 350, 50, 20, DARKGRAY);
+
+    DrawText("Calendario", 350, 50, 20, RAYWHITE);
 
     GridLayout(width, height);
 
