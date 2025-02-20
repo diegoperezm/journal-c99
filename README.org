@@ -20,25 +20,15 @@
 
 * Getting started 
 
-install raylib:  
-
- - Macos:
-
-#+begin_src  sh 
-brew install raylib 
+#+begin_src 
+git clone https://github.com/diegoperezm/journal-c99.git  
+cd journal-c99
+mkdir build
+cd build
+cmake ..  # this will download raylib
+make 
+./journal-c99
 #+end_src 
-
-install raygui:
-
- - Macos: 
-
-#+begin_src  sh 
-cd include && \
-wget https://github.com/raysan5/raygui/tree/master/src/raygui.h
-#+end_src 
-
-
-
 
 # Live Demo
 
