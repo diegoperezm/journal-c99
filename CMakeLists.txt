@@ -33,16 +33,12 @@ target_link_libraries(journal-c99 raylib)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}\
     -std=c99 \
+    -g3     \
     -Wall    \
     -Werror  \
     -Wconversion \
+    -fsanitize=address,undefined \
     -Wdouble-promotion \
     -Wno-sign-conversion")
-
-
-
-
-
-
 
 
