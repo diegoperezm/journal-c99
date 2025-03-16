@@ -26,6 +26,7 @@ FetchContent_MakeAvailable(raylib)
 include_directories(include)
 file(GLOB SOURCES "src/*.c")
 
+
 add_executable(journal-c99 ${SOURCES})
 
 target_compile_definitions(journal-c99 PRIVATE RAYGUI_IMPLEMENTATION)
@@ -33,10 +34,11 @@ target_link_libraries(journal-c99 raylib)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
 
+message(STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
 
-# Configuración específica para Debug
-# cmake -DCMAKE_BUILD_TYPE=Debug ..
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+# Configuración específica para debug, "d" minúscula
+# cmake -DCMAKE_BUILD_TYPE=debug ..
+if (CMAKE_BUILD_TYPE STREQUAL "debug")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
     -std=c99 \
     -g3      \

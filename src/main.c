@@ -1,4 +1,5 @@
 #include "../include/raygui.h"
+#include "../include/style_cyber.h"
 #include "../include/utils.h"
 #include <raylib.h>
 
@@ -11,17 +12,16 @@ int main(void) {
   InitWindow(screenW, screenH, "Media Player");
   SetTargetFPS(24);
 
-  GuiLoadStyle("../resources/cyber.rgs");
+  GuiLoadStyleCyber();
 
-  JournalC99 journalC99 = { .currentState = STATE_WAITING };
+  JournalC99 journalC99 = { .currentState = STATE_ROOT_TODAY };
 
   while (!WindowShouldClose()) {
 
     // Begin
     BeginDrawing();
-    ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
-
-    // Update(&journalC99);
+    ClearBackground(
+        GetColor((unsigned int)GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 
     GridLayout(&journalC99);
     EndDrawing();

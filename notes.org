@@ -1,0 +1,2 @@
+emcc -o index.html main.c  utils.c -Os -Wall ../build/_deps/raylib-build/raylib/libraylib.a -I. -I../build/_deps/raylib-src/src/  -L. -Lpath-to-libraylib-a -s USE_GLFW=3 -s ASYNCIFY --shell-file  ../build/_deps/raylib-src/src/minshell.html -DPLATFORM_WEB
+

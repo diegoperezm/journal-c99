@@ -18,24 +18,20 @@
 #define GRID_PADDING 10.0F
 #define CELL_MARGIN 5.0F
 
-
-
-#define STATE_TABLE      \
-  X(INVALID_STATE)       \
-  X(STATE_WAITING)       \
-  X(STATE_ROOT_TODAY)    \
-  X(STATE_MONTH)         \
-  X(STATE_YEAR)          \
-  X(STATE_GRAPH)         \
+#define STATE_TABLE                                                            \
+  X(INVALID_STATE)                                                             \
+  X(STATE_ROOT_TODAY)                                                          \
+  X(STATE_MONTH)                                                               \
+  X(STATE_YEAR)                                                                \
+  X(STATE_GRAPH)                                                               \
   X(NUM_STATES)
 
-#define EVENT_TABLE    \
-  X(evt_btn_today)     \
-  X(evt_btn_month)     \
-  X(evt_btn_year)      \
-  X(evt_btn_graph)     \
+#define EVENT_TABLE                                                            \
+  X(evt_btn_today)                                                             \
+  X(evt_btn_month)                                                             \
+  X(evt_btn_year)                                                              \
+  X(evt_btn_graph)                                                             \
   X(NUM_EVENTS)
-
 
 #define X(state) state,
 typedef enum { STATE_TABLE } State;
@@ -48,21 +44,19 @@ typedef enum { EVENT_TABLE } Event;
 extern char* state_name[];
 extern char* event_name[];
 
-extern State transition_table[NUM_STATES][NUM_EVENTS]; 
+extern State transition_table[NUM_STATES][NUM_EVENTS];
 
 typedef struct {
   State currentState;
-//  struct {
- //   const char* display;
- // } context;
+  //  struct {
+  //   const char* display;
+  // } context;
 } JournalC99;
 
-
-
-
-#define ELEMENT_LIST     \
-  X(ELMNT_BLANK)       \
-  X(ELMNT_BTN_B)               \
+#define ELEMENT_LIST                                                           \
+  X(ELMNT_BLANK)                                                               \
+  X(ELMNT_BTN_B)                                                               \
+  X(ELMNT_BTN_C)                                                               \
   X(ELMNT_NUM)
 
 #define X(element) element,
@@ -70,12 +64,12 @@ typedef enum { ELEMENT_LIST } Element;
 #undef X
 
 extern char* element_list[];
+int (*return_map(State state))[12];
 
-
-// forward declaration to avoid 
-int GuiButton(Rectangle bounds, const char *text);
+// forward declaration to avoid
+int GuiButton(Rectangle bounds, const char* text);
 void GridLayout(JournalC99* journalC99);
 void GridLayout2(void);
-void Update_State(JournalC99* journalC99, Event event);
+State Update_State(JournalC99* journalC99, Event event);
 
-#endif 
+#endif

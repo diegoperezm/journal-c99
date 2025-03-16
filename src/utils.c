@@ -2,7 +2,6 @@
 #include "raylib.h"
 
 #include <stdbool.h>
-#include <stddef.h>
 #include <stdio.h>
 
 #define X(state) #state,
@@ -19,65 +18,82 @@ char* element_list[] = { ELEMENT_LIST };
 
 State transition_table[NUM_STATES][NUM_EVENTS] = {
   /*             evt_btn_today | evt_btn_month | evt_btn_year | evt_btn_graph */
-  [STATE_WAITING] = { STATE_ROOT_TODAY, STATE_MONTH, STATE_YEAR, STATE_GRAPH },
   [STATE_ROOT_TODAY] = { INVALID_STATE, STATE_MONTH, STATE_YEAR, STATE_GRAPH },
   [STATE_MONTH] = { STATE_ROOT_TODAY, INVALID_STATE, STATE_YEAR, STATE_GRAPH },
 };
 
-void Update_State(JournalC99* journalC99, Event event) {
+State Update_State(JournalC99* journalC99, Event event) {
 
   State currentState = journalC99->currentState;
-  State nextState = transition_table[currentState][event];
+  State nextState = transition_table[currentState][event] != INVALID_STATE
+                        ? transition_table[currentState][event]
+                        : currentState;
 
-  //  printf("|%10s|%10s|%10s|\n", state_name[currentState], event_name[event],
-  //        state_name[nextState]);
+  //  printf("|%10s|%10s|%10s|\n", state_name[currentState],
+  //  event_name[event],state_name[nextState]);
 
-  if (nextState != INVALID_STATE) {
+  return journalC99->currentState = nextState;
+}
 
-    journalC99->currentState = nextState;
+int (*return_map(State state))[12] {
 
-    switch (nextState) {
+  static int map[5][12] = { 0 };
 
-    case STATE_ROOT_TODAY:
-      DrawText("today", 10, 20, 100, WHITE);
-      break;
+  static int map_state_root_today[5][12] = { {
+                                                 ELMNT_BLANK,
+                                             },
+                                             {
+                                                 ELMNT_BLANK,
+                                                 ELMNT_BLANK,
+                                                 ELMNT_BTN_B,
+                                             } };
 
-    case STATE_MONTH:
-      DrawText("month", 10, 20, 100, WHITE);
-      break;
+  static int map_state_month[5][12] = { {
+                                            ELMNT_BLANK,
+                                        },
+                                        {
+                                            ELMNT_BLANK,
+                                            ELMNT_BLANK,
+                                            ELMNT_BTN_C,
+                                        } };
 
-    case STATE_YEAR:
-      DrawText("year", 10, 20, 100, WHITE);
-      break;
+  static int map_state_year[5][12] = { {
+                                           ELMNT_BLANK,
+                                       },
+                                       {
+                                           ELMNT_BLANK,
+                                           ELMNT_BLANK,
+                                           ELMNT_BTN_C,
+                                       } };
 
-    case STATE_GRAPH:
-      DrawText("graph", 10, 20, 100, WHITE);
-      break;
+  static int map_state_graph[5][12] = { {
+                                            ELMNT_BLANK,
+                                        },
+                                        {
+                                            ELMNT_BLANK,
+                                            ELMNT_BLANK,
+                                            ELMNT_BTN_C,
+                                        } };
 
-    default:
-      break;
-    }
+  switch (state) {
+  case STATE_ROOT_TODAY:
+    return map_state_root_today;
+  case STATE_MONTH:
+    return map_state_month;
+  case STATE_YEAR:
+    return map_state_year;
+  case STATE_GRAPH:
+    return map_state_graph;
+  case INVALID_STATE:
+  case NUM_STATES:;
   }
+
+  return map;
 }
 
 void GridLayout(JournalC99* journalC99) {
   float width = (float)GetScreenWidth();
   float height = (float)GetScreenHeight();
-
-  int map[5][12] = { {
-                         ELMNT_BLANK,
-                     },
-                     {
-                         ELMNT_BLANK,
-                         ELMNT_BLANK,
-                         ELMNT_BTN_B,
-                         ELMNT_BTN_B,
-                         ELMNT_BTN_B,
-                         ELMNT_BTN_B,
-                         ELMNT_BTN_B,
-                         ELMNT_BTN_B,
-                         ELMNT_BTN_B,
-                     } };
 
   Rectangle container = { .x = GRID_PADDING,
                           .y = GRID_PADDING,
@@ -89,11 +105,14 @@ void GridLayout(JournalC99* journalC99) {
   float cellHeight =
       (container.height - GRID_PADDING * (GRID_ROWS + 1.0F)) / GRID_ROWS;
 
-  size_t size_row = sizeof(map) / sizeof(map[0]);
-  size_t size_col = sizeof(map[0]) / sizeof(map[0][0]);
+  int(*map)[12] = return_map(journalC99->currentState);
 
-  for (int row = 0; row < size_row; row++) {
-    for (int col = 0; col < size_col; col++) {
+  size_t size_row = 5;
+  size_t size_col = 12;
+
+  for (size_t row = 0; row < size_row; row++) {
+
+    for (size_t col = 0; col < size_col; col++) {
 
       float cell_x = (container.x + GRID_PADDING +
                       (float)col * (cellWidth + GRID_PADDING)) +
@@ -110,16 +129,20 @@ void GridLayout(JournalC99* journalC99) {
       case ELMNT_BTN_B:
         if (GuiButton((Rectangle){ cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                                    cell.height - 2 * CELL_MARGIN },
-                      TextFormat("%d,%d", row, col))) {
-
+                      TextFormat("B: %d,%d ", row, col))) {
           Update_State(journalC99, evt_btn_month);
         }
-
+        break;
+      case ELMNT_BTN_C:
+        if (GuiButton((Rectangle){ cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                                   cell.height - 2 * CELL_MARGIN },
+                      TextFormat("C: %d,%d", row, col))) {
+          Update_State(journalC99, evt_btn_today);
+        }
+        break;
       default:
         break;
       }
-
-      // printf("%s %d\n", element_list[map[row][col]], (int)cell.x);
     }
   }
 }
@@ -153,11 +176,11 @@ void GridLayout2() {
                      CELL_MARGIN;
 
       Rectangle cell = { cell_x, cell_y, cellWidth, cellHeight };
-
-      GuiButton((Rectangle){ cell.x + CELL_MARGIN, cell.y + CELL_MARGIN,
-                             cell.width - 2 * CELL_MARGIN,
-                             cell.height - 2 * CELL_MARGIN },
-                TextFormat("%d,%d", row, col));
+      if (GuiButton((Rectangle){ cell.x + CELL_MARGIN, cell.y + CELL_MARGIN,
+                                 cell.width - 2 * CELL_MARGIN,
+                                 cell.height - 2 * CELL_MARGIN },
+                    TextFormat("%d,%d", row, col))) {
+      }
     }
   }
 }
