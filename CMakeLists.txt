@@ -31,14 +31,35 @@ add_executable(journal-c99 ${SOURCES})
 target_compile_definitions(journal-c99 PRIVATE RAYGUI_IMPLEMENTATION)
 target_link_libraries(journal-c99 raylib)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}\
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
+
+
+# Configuración específica para Debug
+# cmake -DCMAKE_BUILD_TYPE=Debug ..
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
     -std=c99 \
-    -g3     \
+    -g3      \
     -Wall    \
     -Werror  \
     -Wconversion \
-    -fsanitize=address,undefined \
     -Wdouble-promotion \
+    -fsanitize=address,undefined \
+    -Wno-unused-parameter \
+    -Wno-unused-function \
     -Wno-sign-conversion")
+
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}  \
+    -std=c99 \
+    -g3      \
+    -Wall    \
+    -Werror  \
+    -Wconversion \
+    -Wdouble-promotion \
+    -fsanitize=address,undefined \
+    -Wno-unused-parameter \
+    -Wno-unused-function \
+    -Wno-sign-conversion")
+endif()
 
 
