@@ -35,7 +35,7 @@ State Update_State(JournalC99* journalC99, Event event) {
   return journalC99->currentState = nextState;
 }
 
-int (*return_map(State state))[12] {
+int (*return_map_pr(State state))[12] {
 
   static int map[5][12] = { 0 };
 
@@ -105,7 +105,7 @@ void GridLayout(JournalC99* journalC99) {
   float cellHeight =
       (container.height - GRID_PADDING * (GRID_ROWS + 1.0F)) / GRID_ROWS;
 
-  int(*map)[12] = return_map(journalC99->currentState);
+  int(*map)[12] = return_map_pr(journalC99->currentState);
 
   size_t size_row = 5;
   size_t size_col = 12;
@@ -142,44 +142,6 @@ void GridLayout(JournalC99* journalC99) {
         break;
       default:
         break;
-      }
-    }
-  }
-}
-
-void GridLayout2() {
-  float width = (float)GetScreenWidth();
-  float height = (float)GetScreenHeight();
-
-  Rectangle container = { .x = GRID_PADDING,
-                          .y = GRID_PADDING,
-                          .width = width - GRID_PADDING,
-                          .height = height - GRID_PADDING };
-
-  float cellWidth =
-      (container.width - GRID_PADDING * (GRID_COLS + 1)) / GRID_COLS;
-
-  float cellHeight =
-      (container.height - GRID_PADDING * (GRID_ROWS + 1)) / GRID_ROWS;
-
-  for (int row = GRID_ROWS_TOP_OFFSET;
-       row < GRID_ROWS - GRID_ROWS_BOTTOM_OFFSET; row++) {
-    for (int col = GRID_COLS_LEFT_OFFSET;
-         col < (GRID_COLS - GRID_COLS_RIGHT_OFFSET); col++) {
-
-      float cell_x = (container.x + GRID_PADDING +
-                      (float)col * (cellWidth + GRID_PADDING)) +
-                     CELL_MARGIN;
-
-      float cell_y = (container.y + GRID_PADDING +
-                      (float)row * (cellHeight + GRID_PADDING)) +
-                     CELL_MARGIN;
-
-      Rectangle cell = { cell_x, cell_y, cellWidth, cellHeight };
-      if (GuiButton((Rectangle){ cell.x + CELL_MARGIN, cell.y + CELL_MARGIN,
-                                 cell.width - 2 * CELL_MARGIN,
-                                 cell.height - 2 * CELL_MARGIN },
-                    TextFormat("%d,%d", row, col))) {
       }
     }
   }

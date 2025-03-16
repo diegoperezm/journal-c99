@@ -4,16 +4,9 @@
 // if #include "../include/raygui.h" I get ->  "redefinition of guiIcons""
 #include <raylib.h>
 
-#define MIN_WIDTH 50.0F
-#define MIN_HEIGHT 50.0F
-
 #define GRID_COLS 12
-#define GRID_COLS_LEFT_OFFSET 2
-#define GRID_COLS_RIGHT_OFFSET 2
 
 #define GRID_ROWS 8
-#define GRID_ROWS_TOP_OFFSET 1
-#define GRID_ROWS_BOTTOM_OFFSET 3
 
 #define GRID_PADDING 10.0F
 #define CELL_MARGIN 5.0F
@@ -64,7 +57,7 @@ typedef enum { ELEMENT_LIST } Element;
 #undef X
 
 extern char* element_list[];
-int (*return_map(State state))[12];
+int (*return_map_pr(State state))[12];
 
 // forward declaration to avoid
 int GuiButton(Rectangle bounds, const char* text);
