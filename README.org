@@ -26,9 +26,24 @@ cd journal-c99
 mkdir build
 cd build
 cmake ..  # this will download raylib
-make 
+cmake --build ./ --target journal-c99 # or cmake --build ./ --target ggen && ./ggen 
 ./journal-c99
 #+end_src 
+
+graph:
+ - graphviz should be installed in the system
+
+#+begin_src 
+git clone https://github.com/diegoperezm/journal-c99.git  
+cd journal-c99
+mkdir build
+cd build
+cmake ..  # this will download raylib
+cmake --build ./ --target ggen && ./ggen  # outpu graph.png
+#+end_src 
+
+
+
 
 # Live Demo
 
