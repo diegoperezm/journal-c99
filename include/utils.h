@@ -57,12 +57,11 @@ typedef enum { ELEMENT_LIST } Element;
 #undef X
 
 extern char* element_list[];
-int (*return_map_pr(State state))[12];
+int (*Return_Map_Pr(State state))[12];
 
 // forward declaration to avoid
 int GuiButton(Rectangle bounds, const char* text);
-void GridLayout(JournalC99* journalC99);
-void GridLayout2(void);
+void Grid_Layout(JournalC99* journalC99);
 State Update_State(JournalC99* journalC99, Event event);
 
 #endif

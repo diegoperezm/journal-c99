@@ -23,7 +23,7 @@ int main(void) {
     ClearBackground(
         GetColor((unsigned int)GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
 
-    GridLayout(&journalC99);
+    Grid_Layout(&journalC99);
     EndDrawing();
     // End
   }

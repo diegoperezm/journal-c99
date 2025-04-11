@@ -32,9 +32,27 @@ add_executable(journal-c99 ${SOURCES})
 target_compile_definitions(journal-c99 PRIVATE RAYGUI_IMPLEMENTATION)
 target_link_libraries(journal-c99 raylib)
 
+
+# Find Graphviz package
+find_package(Graphviz REQUIRED)
+
+# Include directories for Graphviz headers
+include_directories(${GRAPHVIZ_INCLUDE_DIRS})
+
+# Add the source file for your project
+add_executable(graphviz_example graph/gen_graph.c)
+
+# Link Graphviz libraries
+target_link_libraries(graphviz_example ${GRAPHVIZ_LIBRARIES})
+
+
+
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
 
-message(STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
+#message(STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
+
+
+
 
 # Configuración específica para debug, "d" minúscula
 # cmake -DCMAKE_BUILD_TYPE=debug ..
@@ -63,5 +81,4 @@ if (CMAKE_BUILD_TYPE STREQUAL "debug")
     -Wno-unused-function \
     -Wno-sign-conversion")
 endif()
-
 

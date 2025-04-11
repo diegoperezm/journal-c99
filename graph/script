@@ -1,0 +1,4 @@
+/path/to/raylib/include -L/path/to/raylib/lib -lraylib
+
+gcc -I/opt/local/include/graphviz -L/opt/local/lib -lcgraph -lgvc  main.c gen_graph.c ../src/utils.c && ./a.out 
+
