@@ -54,3 +54,9 @@ void gen_graph(void)
     }
   }
 }
+
+int main(void)
+{
+  gen_graph();
+  return 0;
+}

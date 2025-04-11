@@ -24,35 +24,32 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(raylib)
 
 include_directories(include)
-file(GLOB SOURCES "src/*.c")
+include_directories(graph)
 
+
+file(GLOB SOURCES "src/*.c")
+file(GLOB GSOURCES "graph/*.c")
 
 add_executable(journal-c99 ${SOURCES})
 
 target_compile_definitions(journal-c99 PRIVATE RAYGUI_IMPLEMENTATION)
 target_link_libraries(journal-c99 raylib)
 
-
-# Find Graphviz package
-find_package(Graphviz REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GRAPHVIZ REQUIRED libgvc)
 
 # Include directories for Graphviz headers
 include_directories(${GRAPHVIZ_INCLUDE_DIRS})
 
 # Add the source file for your project
-add_executable(graphviz_example graph/gen_graph.c)
+add_executable(ggen graph/gen_graph.c src/utils.c)
 
 # Link Graphviz libraries
-target_link_libraries(graphviz_example ${GRAPHVIZ_LIBRARIES})
-
-
+target_link_libraries(ggen PRIVATE raylib  ${GRAPHVIZ_LIBRARIES})
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
 
 #message(STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
-
-
-
 
 # Configuración específica para debug, "d" minúscula
 # cmake -DCMAKE_BUILD_TYPE=debug ..
