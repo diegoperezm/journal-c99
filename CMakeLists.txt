@@ -5,7 +5,6 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# find_package(raylib REQUIRED)
 # from clay github.com/nicbarker/clay
 # Adding Raylib
 include(FetchContent)
@@ -16,12 +15,14 @@ set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # don't build the supplied example g
 FetchContent_Declare(
     raylib
     GIT_REPOSITORY "https://github.com/raysan5/raylib.git"
-    GIT_TAG "master"
+    GIT_TAG "c1ab645ca298a2801097931d1079b10ff7eb9df8"
     GIT_PROGRESS TRUE
     GIT_SHALLOW TRUE
 )
 
 FetchContent_MakeAvailable(raylib)
+
+message(STATUS "raylib downloaded to: ${raylib_SOURCE_DIR}")
 
 include_directories(include)
 include_directories(graph)
