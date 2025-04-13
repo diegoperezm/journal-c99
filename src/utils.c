@@ -42,25 +42,56 @@ State Update_State(JournalC99 *journalC99, Event event)
 int (*Return_Map_Pr(State state))[12]
 {
 
+  int calendar[6][7] = {0};
+  int start_col = 1;
+  int days_in_month = 30;
+  int day = 1;
+
+  for (int i = 0; i < 6 && day <= days_in_month; i++)
+  {
+    for (int j = 0; j < 7 && day <= days_in_month; j++)
+    {
+      if (i == 0 && j < start_col)
+        continue;
+      calendar[i][j] = day;
+      day++;
+    }
+  }
+
   static int map[5][12] = {0};
 
-  static int map_state_root_today[5][12] = {{
-                                                TOGGLE_GROUP,
-                                            },
-                                            {
-                                                ELMNT_BLANK,
-                                                ELMNT_BLANK,
-                                                BTN_B,
-                                            }};
+  static int map_state_root_today[6][12] = {
+      {
+          TOGGLE_GROUP,
+      },
+  };
 
-  static int map_state_month[5][12] = {{
-                                           TOGGLE_GROUP,
-                                       },
-                                       {
-                                           ELMNT_BLANK,
-                                           ELMNT_BLANK,
-                                           BTN_C,
-                                       }};
+  static int map_state_month[6][12] = {
+      {
+          TOGGLE_GROUP,
+      },
+  };
+
+  // Insert calendar into map_state_month
+  int grid_row_offset = 1; // Start placing in row 1 of the grid
+  int grid_col_offset = 2; // Start
+
+  for (int i = 0; i < 6; i++)
+  {
+    for (int j = 0; j < 7; j++)
+    {
+      if (calendar[i][j] != 0)
+      {
+        int grid_row = grid_row_offset + i;
+        int grid_col = grid_col_offset + j;
+
+        if (grid_row < 6 && grid_col < 12)
+        {
+          map_state_month[grid_row][grid_col] = ELMNT_DAY;
+        }
+      }
+    }
+  }
 
   static int map_state_year[5][12] = {{
                                           TOGGLE_GROUP,

@@ -20,9 +20,9 @@ void Grid_Layout(JournalC99 *journalC99)
 
   int(*map)[12] = Return_Map_Pr(journalC99->currentState);
 
-  size_t size_row = 5;
+  size_t size_row = 6;
   size_t size_col = 12;
-
+  int i = 1;
   for (size_t row = 0; row < size_row; row++)
   {
 
@@ -50,35 +50,47 @@ void Grid_Layout(JournalC99 *journalC99)
           Update_State(journalC99, evt_btn_month);
         }
         break;
+
       case BTN_C:
         if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                                   cell.height - 2 * CELL_MARGIN},
-                      TextFormat("C: %d,%d", row, col)))
+                      TextFormat("C: %d", col)))
         {
           Update_State(journalC99, evt_btn_today);
         }
         break;
+      case ELMNT_DAY:
+        if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                                  cell.height - 2 * CELL_MARGIN},
+                      TextFormat("%d", i++)))
+
+        {
+          Update_State(journalC99, evt_btn_today);
+        }
+        break;
+
       case TOGGLE_GROUP:
       {
+        int stateOffset = 1;
         /*
-         * -1 because  STATE_TABLE start [0]: INVALID_STATE
+         * -1 because  STATE_TABLE start at [0]: INVALID_STATE
          *  and Update_State->nextState == 0
          *  when there is no explicit transition in
-         *  the transition_table (this doesn't  exist [state] = {state ...}
+         *  the transition_table (when this doesn't  exist [state] = {state ...}
          */
-        int temp = ((int)journalC99->currentState) - 1;
+        int temp = ((int)journalC99->currentState) - stateOffset;
 
         GuiToggleGroup((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                                    cell.height - 2 * CELL_MARGIN},
                        "TODAY;MONTH;YEAR;GRAPH", &temp);
 
         /*
-         * -1 because  STATE_TABLE start [0]: INVALID_STATE
+         * -1 because  STATE_TABLE start at [0]: INVALID_STATE
          *  and Update_State->nextState == 0
          *  when there is no explicit transition in
-         *  the transition_table (this doesn't  exist [state] = {state ...}
+         *  the transition_table (when this doesn't  exist [state] = {state ...}
          */
-        if (temp != ((int)journalC99->currentState) - 1)
+        if (temp != ((int)journalC99->currentState) - stateOffset)
         {
           /*
             Event(temp):
