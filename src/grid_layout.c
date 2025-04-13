@@ -42,7 +42,7 @@ void Grid_Layout(JournalC99 *journalC99)
       switch (map[row][col])
       {
 
-      case ELMNT_BTN_B:
+      case BTN_B:
         if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                                   cell.height - 2 * CELL_MARGIN},
                       TextFormat("B: %d,%d ", row, col)))
@@ -50,7 +50,7 @@ void Grid_Layout(JournalC99 *journalC99)
           Update_State(journalC99, evt_btn_month);
         }
         break;
-      case ELMNT_BTN_C:
+      case BTN_C:
         if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                                   cell.height - 2 * CELL_MARGIN},
                       TextFormat("C: %d,%d", row, col)))
@@ -58,6 +58,40 @@ void Grid_Layout(JournalC99 *journalC99)
           Update_State(journalC99, evt_btn_today);
         }
         break;
+      case TOGGLE_GROUP:
+      {
+        /*
+         * -1 because  STATE_TABLE start [0]: INVALID_STATE
+         *  and Update_State->nextState == 0
+         *  when there is no explicit transition in
+         *  the transition_table (this doesn't  exist [state] = {state ...}
+         */
+        int temp = ((int)journalC99->currentState) - 1;
+
+        GuiToggleGroup((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                                   cell.height - 2 * CELL_MARGIN},
+                       "TODAY;MONTH;YEAR;GRAPH", &temp);
+
+        /*
+         * -1 because  STATE_TABLE start [0]: INVALID_STATE
+         *  and Update_State->nextState == 0
+         *  when there is no explicit transition in
+         *  the transition_table (this doesn't  exist [state] = {state ...}
+         */
+        if (temp != ((int)journalC99->currentState) - 1)
+        {
+          /*
+            Event(temp):
+            order of EVENT_TABLE and
+            GuiToggleGroup(..., "TODAY;MONTH;YEAR;GRAPH", ...);
+            should be the same.
+           */
+          Update_State(journalC99, (Event)temp);
+        }
+
+        break;
+      }
+
       default:
         break;
       }

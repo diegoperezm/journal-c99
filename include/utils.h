@@ -27,19 +27,26 @@
   X(NUM_EVENTS)
 
 #define X(state) state,
-typedef enum { STATE_TABLE } State;
+typedef enum
+{
+  STATE_TABLE
+} State;
 #undef X
 
 #define X(event) event,
-typedef enum { EVENT_TABLE } Event;
+typedef enum
+{
+  EVENT_TABLE
+} Event;
 #undef X
 
-extern char* state_name[];
-extern char* event_name[];
+extern char *state_name[];
+extern char *event_name[];
 
 extern State transition_table[NUM_STATES][NUM_EVENTS];
 
-typedef struct {
+typedef struct
+{
   State currentState;
   //  struct {
   //   const char* display;
@@ -48,20 +55,25 @@ typedef struct {
 
 #define ELEMENT_LIST                                                           \
   X(ELMNT_BLANK)                                                               \
-  X(ELMNT_BTN_B)                                                               \
-  X(ELMNT_BTN_C)                                                               \
+  X(BTN_B)                                                                     \
+  X(BTN_C)                                                                     \
+  X(TOGGLE_GROUP)                                                              \
   X(ELMNT_NUM)
 
 #define X(element) element,
-typedef enum { ELEMENT_LIST } Element;
+typedef enum
+{
+  ELEMENT_LIST
+} Element;
 #undef X
 
-extern char* element_list[];
+extern char *element_list[];
 int (*Return_Map_Pr(State state))[12];
 
 // forward declaration to avoid
-int GuiButton(Rectangle bounds, const char* text);
-void Grid_Layout(JournalC99* journalC99);
-State Update_State(JournalC99* journalC99, Event event);
+int GuiButton(Rectangle bounds, const char *text);
+void Grid_Layout(JournalC99 *journalC99);
+int GuiToggleGroup(Rectangle bounds, const char *text, int *active);
+State Update_State(JournalC99 *journalC99, Event event);
 
 #endif

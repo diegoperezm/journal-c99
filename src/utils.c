@@ -16,10 +16,13 @@ char *element_list[] = {ELEMENT_LIST};
 #undef X
 
 State transition_table[NUM_STATES][NUM_EVENTS] = {
+
     /*             evt_btn_today | evt_btn_month | evt_btn_year | evt_btn_graph
      */
     [STATE_ROOT_TODAY] = {INVALID_STATE, STATE_MONTH, STATE_YEAR, STATE_GRAPH},
     [STATE_MONTH] = {STATE_ROOT_TODAY, INVALID_STATE, STATE_YEAR, STATE_GRAPH},
+    //[STATE_GRAPH] = {INVALID_STATE, INVALID_STATE, INVALID_STATE,
+    //                INVALID_STATE},
 };
 
 State Update_State(JournalC99 *journalC99, Event event)
@@ -30,8 +33,8 @@ State Update_State(JournalC99 *journalC99, Event event)
                         ? transition_table[currentState][event]
                         : currentState;
 
-  //  printf("|%10s|%10s|%10s|\n", state_name[currentState],
-  //  event_name[event],state_name[nextState]);
+  //  printf("|%10s|%10s|%10s|\n", state_name[currentState], event_name[event],
+  //        state_name[nextState]);
 
   return journalC99->currentState = nextState;
 }
@@ -42,39 +45,40 @@ int (*Return_Map_Pr(State state))[12]
   static int map[5][12] = {0};
 
   static int map_state_root_today[5][12] = {{
-                                                ELMNT_BLANK,
+                                                TOGGLE_GROUP,
                                             },
                                             {
                                                 ELMNT_BLANK,
                                                 ELMNT_BLANK,
-                                                ELMNT_BTN_B,
+                                                BTN_B,
                                             }};
 
   static int map_state_month[5][12] = {{
-                                           ELMNT_BLANK,
+                                           TOGGLE_GROUP,
                                        },
                                        {
                                            ELMNT_BLANK,
                                            ELMNT_BLANK,
-                                           ELMNT_BTN_C,
+                                           BTN_C,
                                        }};
 
   static int map_state_year[5][12] = {{
-                                          ELMNT_BLANK,
+                                          TOGGLE_GROUP,
+
                                       },
                                       {
                                           ELMNT_BLANK,
                                           ELMNT_BLANK,
-                                          ELMNT_BTN_C,
+                                          BTN_C,
                                       }};
 
   static int map_state_graph[5][12] = {{
-                                           ELMNT_BLANK,
+                                           TOGGLE_GROUP,
                                        },
                                        {
                                            ELMNT_BLANK,
                                            ELMNT_BLANK,
-                                           ELMNT_BTN_C,
+                                           BTN_C,
                                        }};
 
   switch (state)
