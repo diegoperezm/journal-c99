@@ -1,6 +1,6 @@
 #include "../include/utils.h"
-#include "/usr/include/graphviz/cgraph.h"
-#include "/usr/include/graphviz/gvc.h"
+#include <cgraph.h>
+#include <graphviz/gvc.h>
 #include "gen_graph.h"
 #include <graphviz/gvcext.h>
 #include <graphviz/types.h>

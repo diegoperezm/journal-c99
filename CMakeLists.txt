@@ -41,6 +41,7 @@ pkg_check_modules(GRAPHVIZ REQUIRED libgvc)
 
 # Include directories for Graphviz headers
 include_directories(${GRAPHVIZ_INCLUDE_DIRS})
+link_directories(${GRAPHVIZ_LIBRARY_DIRS})
 
 # Add the source file for your project
 add_executable(ggen graph/gen_graph.c src/utils.c)
