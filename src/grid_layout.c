@@ -20,7 +20,7 @@ void Grid_Layout(JournalC99 *journalC99)
 
   int(*map)[12] = Return_Map_Pr(journalC99->currentState);
 
-  size_t size_row = 6;
+  size_t size_row = 12;
   size_t size_col = 12;
   int i = 1;
   for (size_t row = 0; row < size_row; row++)
@@ -41,7 +41,6 @@ void Grid_Layout(JournalC99 *journalC99)
 
       switch (map[row][col])
       {
-
       case BTN_B:
         if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                                   cell.height - 2 * CELL_MARGIN},
@@ -59,6 +58,7 @@ void Grid_Layout(JournalC99 *journalC99)
           Update_State(journalC99, evt_btn_today);
         }
         break;
+
       case ELMNT_DAY:
         if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                                   cell.height - 2 * CELL_MARGIN},
@@ -67,6 +67,47 @@ void Grid_Layout(JournalC99 *journalC99)
         {
           Update_State(journalC99, evt_btn_today);
         }
+
+        break;
+
+      case ELMNT_SUNDAY:
+        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                             cell.height - 2 * CELL_MARGIN},
+                 "Sunday");
+        break;
+
+      case ELMNT_MONDAY:
+        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                             cell.height - 2 * CELL_MARGIN},
+                 "Monday");
+        break;
+
+      case ELMNT_TUESDAY:
+        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                             cell.height - 2 * CELL_MARGIN},
+                 "Tuesday");
+        break;
+
+      case ELMNT_WEDNESDAY:
+        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                             cell.height - 2 * CELL_MARGIN},
+                 "Wednesday");
+        break;
+
+      case ELMNT_THURSDAY:
+        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                             cell.height - 2 * CELL_MARGIN},
+                 "Thursday");
+        break;
+      case ELMNT_FRIDAY:
+        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                             cell.height - 2 * CELL_MARGIN},
+                 "Friday");
+        break;
+      case ELMNT_SATURDAY:
+        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                             cell.height - 2 * CELL_MARGIN},
+                 "Saturday");
         break;
 
       case TOGGLE_GROUP:

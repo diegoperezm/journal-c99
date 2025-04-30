@@ -59,6 +59,14 @@ typedef struct
   X(BTN_B)                                                                     \
   X(BTN_C)                                                                     \
   X(TOGGLE_GROUP)                                                              \
+  X(ELMNT_LABEL)                                                               \
+  X(ELMNT_SUNDAY)                                                              \
+  X(ELMNT_MONDAY)                                                              \
+  X(ELMNT_TUESDAY)                                                             \
+  X(ELMNT_WEDNESDAY)                                                           \
+  X(ELMNT_THURSDAY)                                                            \
+  X(ELMNT_FRIDAY)                                                              \
+  X(ELMNT_SATURDAY)                                                            \
   X(ELMNT_NUM)
 
 #define X(element) element,
@@ -72,6 +80,7 @@ extern char *element_list[];
 int (*Return_Map_Pr(State state))[12];
 
 // forward declaration to avoid
+int GuiLabel(Rectangle bounds, const char *text);
 int GuiButton(Rectangle bounds, const char *text);
 void Grid_Layout(JournalC99 *journalC99);
 int GuiToggleGroup(Rectangle bounds, const char *text, int *active);
