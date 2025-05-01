@@ -83,8 +83,9 @@ State transition_table[NUM_STATES][NUM_EVENTS] = {
      */
     [STATE_ROOT_TODAY] = {INVALID_STATE, STATE_MONTH, STATE_YEAR, STATE_GRAPH},
     [STATE_MONTH] = {STATE_ROOT_TODAY, INVALID_STATE, STATE_YEAR, STATE_GRAPH},
-    //[STATE_GRAPH] = {INVALID_STATE, INVALID_STATE, INVALID_STATE,
-    //                INVALID_STATE},
+    [STATE_YEAR] = {STATE_ROOT_TODAY, STATE_MONTH, INVALID_STATE, STATE_GRAPH},
+    [STATE_GRAPH] = {STATE_ROOT_TODAY, STATE_MONTH, STATE_YEAR, INVALID_STATE},
+
 };
 
 State Update_State(JournalC99 *journalC99, Event event)
@@ -142,11 +143,12 @@ int (*Return_Map_Pr(State state))[12]
 
   time_t now = time(NULL);
   int8_t days_in_month = get_days_in_month(&now);
-  //  const char *day_name[] = {"Sunday",   "Monday", "Tuesday", "Wednesday",
-  //                           "Thursday", "Friday", "Saturday"};
 
-  int calendar[5][7] = {0};
+  struct tm *nnow = localtime(&now);
+
+  uint8_t current_day = (uint8_t)nnow->tm_wday;
   int day = 1;
+  int first_week_day_in_month = 2;
 
   static int map_state_month[12][12] = {
       {
@@ -165,17 +167,6 @@ int (*Return_Map_Pr(State state))[12]
       },
 
   };
-  /*
-    printf("----\n");
-    for (int i = 0; i < 5; i++)
-    {
-      for (int j = 0; j < 7; j++)
-      {
-        printf("%d", calendar[i][j]);
-      }
-      printf("\n");
-    }
-  */
 
   static int map_state_root_today[12][12] = {
       {
@@ -183,60 +174,41 @@ int (*Return_Map_Pr(State state))[12]
       },
   };
 
-  static int map_state_year[5][12] = {{
-                                          TOGGLE_GROUP,
+  static int map_state_year[12][12] = {
+      {
+          TOGGLE_GROUP,
 
-                                      },
-                                      {
-                                          ELMNT_BLANK,
-                                          ELMNT_BLANK,
-                                          BTN_C,
-                                      }};
+      },
+  };
 
-  static int map_state_graph[5][12] = {{
-                                           TOGGLE_GROUP,
-                                       },
-                                       {
-                                           ELMNT_BLANK,
-                                           ELMNT_BLANK,
-                                           BTN_C,
-                                       }};
+  static int map_state_graph[12][12] = {
+      {
+          TOGGLE_GROUP,
+      },
+  };
 
   switch (state)
   {
   case STATE_ROOT_TODAY:
+    printf("%d", current_day);
+    map_state_root_today[2][current_day] = ELMNT_DAY;
     return map_state_root_today;
+
     break;
   case STATE_MONTH:
-
-    for (int i = 0; i < 5 && day <= days_in_month; i++)
+    for (int i = 0; i < 5 && day <= days_in_month; ++i)
     {
-      for (int j = 0; j < 7 && day <= days_in_month; j++)
+      for (int j = 0; j < 7 && day <= days_in_month; ++j)
       {
-        calendar[i][j] = day;
+        if (i == 0 && j < first_week_day_in_month)
+        {
+          continue; // Saltar hasta el primer día real del mes
+        }
+        map_state_month[i + 2][j + 2] = ELMNT_DAY;
         day++;
       }
     }
-
-    int grid_row_offset = 2;
-    int grid_col_offset = 2;
-
-    for (int i = 0; i < 5; i++)
-    {
-      for (int j = 0; j < 7; j++)
-      {
-        if (calendar[i][j] != 0)
-        {
-          int grid_row = grid_row_offset + i;
-          int grid_col = grid_col_offset + j;
-          map_state_month[grid_row][grid_col] = ELMNT_DAY;
-        }
-      }
-    }
-
     return map_state_month;
-
-    break;
 
   case STATE_YEAR:
     return map_state_year;

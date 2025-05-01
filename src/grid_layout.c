@@ -73,41 +73,41 @@ void Grid_Layout(JournalC99 *journalC99)
       case ELMNT_SUNDAY:
         GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                              cell.height - 2 * CELL_MARGIN},
-                 "Sunday");
+                 "Sun");
         break;
 
       case ELMNT_MONDAY:
         GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                              cell.height - 2 * CELL_MARGIN},
-                 "Monday");
+                 "Mon");
         break;
 
       case ELMNT_TUESDAY:
         GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                              cell.height - 2 * CELL_MARGIN},
-                 "Tuesday");
+                 "Tues");
         break;
 
       case ELMNT_WEDNESDAY:
         GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                              cell.height - 2 * CELL_MARGIN},
-                 "Wednesday");
+                 "Wednes");
         break;
 
       case ELMNT_THURSDAY:
         GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                              cell.height - 2 * CELL_MARGIN},
-                 "Thursday");
+                 "Thurs");
         break;
       case ELMNT_FRIDAY:
         GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                              cell.height - 2 * CELL_MARGIN},
-                 "Friday");
+                 "Fri");
         break;
       case ELMNT_SATURDAY:
         GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                              cell.height - 2 * CELL_MARGIN},
-                 "Saturday");
+                 "Sat");
         break;
 
       case TOGGLE_GROUP:
