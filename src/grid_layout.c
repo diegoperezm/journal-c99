@@ -1,6 +1,5 @@
 #include "../include/utils.h"
 #include "raylib.h"
-#include <stdio.h>
 
 void Grid_Layout(JournalC99 *journalC99)
 {
@@ -57,7 +56,40 @@ void Grid_Layout(JournalC99 *journalC99)
           Update_State(journalC99, evt_btn_today);
         }
         break;
+      case TOGGLE_GROUP:
+      {
+        int stateOffset = 1;
+        /*
+         * -1 because  STATE_TABLE start at [0]: INVALID_STATE
+         *  and Update_State->nextState == 0
+         *  when there is no explicit transition in
+         *  the transition_table (when this doesn't  exist [state] = {state ...}
+         */
+        int temp = ((int)journalC99->currentState) - stateOffset;
 
+        GuiToggleGroup((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                                   cell.height - 2 * CELL_MARGIN},
+                       "TODAY;MONTH;YEAR;GRAPH", &temp);
+
+        /*
+         * -1 because  STATE_TABLE start at [0]: INVALID_STATE
+         *  and Update_State->nextState == 0
+         *  when there is no explicit transition in
+         *  the transition_table (when this doesn't  exist [state] = {state ...}
+         */
+        if (temp != ((int)journalC99->currentState) - stateOffset)
+        {
+          /*
+            Event(temp):
+            order of EVENT_TABLE and
+            GuiToggleGroup(..., "TODAY;MONTH;YEAR;GRAPH", ...);
+            should be the same.
+           */
+          Update_State(journalC99, (Event)temp);
+        }
+
+        break;
+      }
       case ELMNT_DAY:
         if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                                   cell.height - 2 * CELL_MARGIN},
@@ -113,41 +145,11 @@ void Grid_Layout(JournalC99 *journalC99)
                              cell.height - 2 * CELL_MARGIN},
                  current_month_name);
         break;
-
-      case TOGGLE_GROUP:
-      {
-        int stateOffset = 1;
-        /*
-         * -1 because  STATE_TABLE start at [0]: INVALID_STATE
-         *  and Update_State->nextState == 0
-         *  when there is no explicit transition in
-         *  the transition_table (when this doesn't  exist [state] = {state ...}
-         */
-        int temp = ((int)journalC99->currentState) - stateOffset;
-
-        GuiToggleGroup((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                                   cell.height - 2 * CELL_MARGIN},
-                       "TODAY;MONTH;YEAR;GRAPH", &temp);
-
-        /*
-         * -1 because  STATE_TABLE start at [0]: INVALID_STATE
-         *  and Update_State->nextState == 0
-         *  when there is no explicit transition in
-         *  the transition_table (when this doesn't  exist [state] = {state ...}
-         */
-        if (temp != ((int)journalC99->currentState) - stateOffset)
-        {
-          /*
-            Event(temp):
-            order of EVENT_TABLE and
-            GuiToggleGroup(..., "TODAY;MONTH;YEAR;GRAPH", ...);
-            should be the same.
-           */
-          Update_State(journalC99, (Event)temp);
-        }
-
+      case ELMNT_TEXT:
+        GuiTextBox((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                               cell.height - 2 * CELL_MARGIN},
+                   current_month_name, 25000, false);
         break;
-      }
 
       default:
         break;
