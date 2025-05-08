@@ -1,7 +1,5 @@
 #include "../include/utils.h"
 #include "raylib.h"
-#include <bits/stdint-intn.h>
-#include <bits/stdint-uintn.h>
 #include <bits/types/time_t.h>
 #include <errno.h>
 #include <stdbool.h>
@@ -194,7 +192,6 @@ int (*Return_Map_Pr(State state))[12]
     map_state_root_today[2][current_day] = ELMNT_DAY;
     return map_state_root_today;
 
-    break;
   case STATE_MONTH:
     for (int i = 0; i < 5 && day <= days_in_month; ++i)
     {
@@ -212,11 +209,9 @@ int (*Return_Map_Pr(State state))[12]
 
   case STATE_YEAR:
     return map_state_year;
-    break;
 
   case STATE_GRAPH:
     return map_state_graph;
-    break;
   case INVALID_STATE:
     break;
   case NUM_STATES:;
