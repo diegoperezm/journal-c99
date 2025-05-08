@@ -1,13 +1,10 @@
 #include "../include/utils.h"
-#include "raylib.h"
-#include <bits/types/time_t.h>
+#include <time.h>
 #include <errno.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
-#include <time.h>
 #define MAX_PROJECTS 4
 #define MAX_MONTHS 12
 #define MAX_DAYS_IN_MONTH 31
@@ -188,7 +185,7 @@ int (*Return_Map_Pr(State state))[12]
   switch (state)
   {
   case STATE_ROOT_TODAY:
-    printf("%d", current_day);
+    //printf("%d", current_day);
     map_state_root_today[2][current_day] = ELMNT_DAY;
     return map_state_root_today;
 
