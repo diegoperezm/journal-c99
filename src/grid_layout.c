@@ -1,6 +1,5 @@
 #include "../include/utils.h"
 #include "raylib.h"
-#include <stdbool.h>
 #include <stdio.h>
 
 void Grid_Layout(JournalC99 *journalC99)
@@ -108,6 +107,11 @@ void Grid_Layout(JournalC99 *journalC99)
         GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                              cell.height - 2 * CELL_MARGIN},
                  "Sat");
+        break;
+      case ELMNT_MONTH:
+        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
+                             cell.height - 2 * CELL_MARGIN},
+                 current_month_name);
         break;
 
       case TOGGLE_GROUP:

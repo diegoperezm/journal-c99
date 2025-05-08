@@ -3,6 +3,8 @@
 
 // if #include "../include/raygui.h" I get ->  "redefinition of guiIcons""
 #include <raylib.h>
+#include <stdint.h>
+#include <sys/time.h>
 
 #define GRID_COLS 12
 
@@ -67,6 +69,7 @@ typedef struct
   X(ELMNT_THURSDAY)                                                            \
   X(ELMNT_FRIDAY)                                                              \
   X(ELMNT_SATURDAY)                                                            \
+  X(ELMNT_MONTH)                                                               \
   X(ELMNT_NUM)
 
 #define X(element) element,
@@ -76,7 +79,63 @@ typedef enum
 } Element;
 #undef X
 
+#define MAX_PROJECTS 4
+#define MAX_MONTHS 12
+#define MAX_DAYS_IN_MONTH 31
+#define MAX_PROJECT_NAME_LEN 64
+#define MAX_COMMENT_LEN 256
+#define MAX_TIME_STRING_LEN 6
+
+typedef struct
+{
+  uint8_t hours;
+  uint8_t minutes;
+} Time;
+
+typedef struct
+{
+  char name[MAX_PROJECT_NAME_LEN];
+  Time duration;
+} ProjectTime;
+
+typedef struct
+{
+  char currentDayName[10];
+  char currentMonthName[10];
+  char currentDayNumber[3];
+  char comments[MAX_COMMENT_LEN];
+
+  char start[MAX_PROJECTS][MAX_TIME_STRING_LEN];
+  char end[MAX_PROJECTS][MAX_TIME_STRING_LEN];
+  char project[MAX_PROJECTS][MAX_TIME_STRING_LEN];
+  Time totalHrs;
+} DayEntry;
+
+typedef struct
+{
+  uint8_t dayNumber;
+  ProjectTime projectTimes[MAX_PROJECTS];
+  uint8_t projectCount;
+} DaySummary;
+
+typedef struct
+{
+  char monthName[10];
+  DaySummary days[MAX_DAYS_IN_MONTH];
+  uint8_t dayCount;
+  ProjectTime totalTime[MAX_PROJECTS];
+  uint8_t projectCount;
+} MonthSummary;
+
+typedef struct
+{
+  DayEntry today;
+  DayEntry daysByMonth[MAX_MONTHS][MAX_DAYS_IN_MONTH];
+  MonthSummary year[MAX_MONTHS];
+} Data;
+
 extern char *element_list[];
+char * current_month_name;
 int (*Return_Map_Pr(State state))[12];
 
 // forward declaration to avoid
