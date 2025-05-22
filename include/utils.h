@@ -142,6 +142,9 @@ char *current_month_name;
 int (*Return_Map_Pr(State state))[12];
 
 // forward declaration to avoid
+int GuiGetStyle(int control, int property); // Get one style property
+Color GetColor(unsigned int hexValue);   // Get Color structure from hexadecimal value
+
 void DrawText(const char *text, int posX, int posY, int fontSize, Color color);       // Draw text (using default font)
 int GuiTextBox(Rectangle bounds, char *text, int textSize, bool editMode);
 int GuiLabel(Rectangle bounds, const char *text);

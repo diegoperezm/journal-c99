@@ -6,6 +6,8 @@ void Grid_Layout(JournalC99 *journalC99)
   const float width = (float)GetScreenWidth();
   const float height = (float)GetScreenHeight();
 
+  Color font_color = GetColor(GuiGetStyle(0, 2));
+
   const Rectangle container = {.x = GRID_PADDING,
                                .y = GRID_PADDING,
                                .width = width - 2 * GRID_PADDING,
@@ -139,7 +141,7 @@ void Grid_Layout(JournalC99 *journalC99)
                  "Sat");
         break;
       case ELMNT_MONTH:
-        DrawText(current_month_name, (int)cell.x, (int)cell.y, 24, RAYWHITE);
+        DrawText(current_month_name, (int)cell.x, (int)cell.y, 24, font_color);
         break;
       case ELMNT_TEXT:
         DrawText(current_month_name, (int)cell.x, (int)cell.y, 32, RAYWHITE);
