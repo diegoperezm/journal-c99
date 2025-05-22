@@ -8,8 +8,8 @@ void Grid_Layout(JournalC99 *journalC99)
 
   Color font_color = GetColor(GuiGetStyle(0, 2));
 
-// TODO: fix this, maybe use DrawTextEx ???
-  int fontSize = height *  0.02f;
+  // TODO: fix this, maybe use DrawTextEx ???
+  int fontSize = height * 0.02f;
 
   const Rectangle container = {.x = GRID_PADDING,
                                .y = GRID_PADDING,
@@ -130,14 +130,21 @@ void Grid_Layout(JournalC99 *journalC99)
         DrawText("Sat", (int)cell.x, (int)cell.y, fontSize, font_color);
         break;
       case ELMNT_MONTH:
-        DrawText(current_month_name, (int)cell.x, (int)cell.y, fontSize * 2, font_color);
+        DrawText(current_month_name, (int)cell.x, (int)cell.y, fontSize * 2,
+                 font_color);
         break;
       case ELMNT_TEXT:
         DrawText(current_month_name, (int)cell.x, (int)cell.y, 32, RAYWHITE);
         break;
 
       case ELMNT_CURR_DAY_NAME:
-        DrawText(current_day_name, (int)cell.x, (int)cell.y, fontSize * 2, font_color);
+        DrawText(current_day_name, (int)cell.x, (int)cell.y, fontSize * 2,
+                 font_color);
+        break;
+
+      case ELMNT_CURR_DAY_NUMBER:
+        DrawText(current_day_number, (int)cell.x, (int)cell.y, fontSize * 2,
+                 font_color);
         break;
 
       default:

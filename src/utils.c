@@ -1,4 +1,6 @@
 #include "../include/utils.h"
+
+#include <stdio.h>
 #include <sys/types.h>
 #include <time.h>
 
@@ -82,6 +84,8 @@ int (*Return_Map_Pr(const State state))[12]
   static int map[5][12] = {0};
   time_t now = time(NULL);
   struct tm *tm_now = localtime(&now);
+  snprintf(current_day_number, sizeof(current_day_number), "%u",
+           tm_now->tm_mday);
   uint8_t current_week_day = (uint8_t)tm_now->tm_wday;
   uint8_t current_month = (uint8_t)tm_now->tm_mon;
   current_month_name = month[current_month];
@@ -92,7 +96,7 @@ int (*Return_Map_Pr(const State state))[12]
       {
           TOGGLE_GROUP,
       },
-      {ELMNT_MONTH, ELMNT_CURR_DAY_NAME}};
+      {ELMNT_MONTH, ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER}};
 
   static int map_state_month[SIZE_ROW][SIZE_COL] = {
       {

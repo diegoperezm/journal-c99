@@ -71,7 +71,8 @@ typedef struct
   X(ELMNT_SATURDAY)                                                            \
   X(ELMNT_MONTH)                                                               \
   X(ELMNT_TEXT)                                                                \
-  X(ELMNT_CURR_DAY_NAME)                                                            \
+  X(ELMNT_CURR_DAY_NAME)                                                       \
+  X(ELMNT_CURR_DAY_NUMBER)                                                     \
   X(ELMNT_NUM)
 
 #define X(element) element,
@@ -141,6 +142,7 @@ typedef struct
 extern char *element_list[];
 char *current_month_name;
 char *current_day_name;
+char current_day_number[3];
 int (*Return_Map_Pr(State state))[12];
 
 // forward declaration to avoid
