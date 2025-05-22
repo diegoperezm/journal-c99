@@ -13,7 +13,6 @@ char *event_name[] = {EVENT_TABLE};
 #define X(element) #element,
 char *element_list[] = {ELEMENT_LIST};
 #undef X
-char *current_month[];
 
 char *month[12] = {
     "January", "February", "March",     "April",   "May",      "June",
