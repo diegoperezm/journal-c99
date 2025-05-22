@@ -123,14 +123,14 @@ int (*Return_Map_Pr(const State state))[12]
 
   };
 
-  static int map_state_year[12][12] = {
+  static int map_state_year[SIZE_ROW][SIZE_COL] = {
       {
           TOGGLE_GROUP,
 
       },
   };
 
-  static int map_state_graph[12][12] = {
+  static int map_state_graph[SIZE_ROW][SIZE_COL] = {
       {
           TOGGLE_GROUP,
       },
