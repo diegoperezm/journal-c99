@@ -85,6 +85,8 @@ typedef enum
 #define MAX_PROJECT_NAME_LEN 64
 #define MAX_COMMENT_LEN 256
 #define MAX_TIME_STRING_LEN 6
+#define SIZE_ROW  12
+#define SIZE_COL  12
 
 typedef struct
 {

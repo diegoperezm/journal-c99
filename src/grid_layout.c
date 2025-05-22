@@ -3,28 +3,26 @@
 
 void Grid_Layout(JournalC99 *journalC99)
 {
-  float width = (float)GetScreenWidth();
-  float height = (float)GetScreenHeight();
+  const float width = (float)GetScreenWidth();
+  const float height = (float)GetScreenHeight();
 
-  Rectangle container = {.x = GRID_PADDING,
-                         .y = GRID_PADDING,
-                         .width = width - 2 * GRID_PADDING,
-                         .height = height - 2 * GRID_PADDING};
+  const Rectangle container = {.x = GRID_PADDING,
+                               .y = GRID_PADDING,
+                               .width = width - 2 * GRID_PADDING,
+                               .height = height - 2 * GRID_PADDING};
 
-  float cellWidth =
+  const float cellWidth =
       (container.width - GRID_PADDING * (GRID_COLS + 1.0F)) / GRID_COLS;
-  float cellHeight =
+  const float cellHeight =
       (container.height - GRID_PADDING * (GRID_ROWS + 1.0F)) / GRID_ROWS;
 
-  int(*map)[12] = Return_Map_Pr(journalC99->currentState);
+  const int(*map)[12] = Return_Map_Pr(journalC99->currentState);
 
-  size_t size_row = 12;
-  size_t size_col = 12;
   int i = 1;
-  for (size_t row = 0; row < size_row; row++)
+  for (size_t row = 0; row < SIZE_ROW; row++)
   {
 
-    for (size_t col = 0; col < size_col; col++)
+    for (size_t col = 0; col < SIZE_COL; col++)
     {
 
       float cell_x = (container.x + GRID_PADDING +
