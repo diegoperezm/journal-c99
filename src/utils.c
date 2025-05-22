@@ -1,5 +1,4 @@
 #include "../include/utils.h"
-#include <string.h>
 #include <sys/types.h>
 #include <time.h>
 
@@ -40,18 +39,18 @@ uint8_t days_in_month[12] = {
 };
 
 uint8_t first_day_in_month[12] = {
-    3, // January 1, 2025 is Wednesday
-    6, // February 1, 2025 is Saturday
-    6, // March 1, 2025 is Saturday
-    2, // April 1, 2025 is Tuesday
-    4, // May 1, 2025 is Thursday
-    0, // June 1, 2025 is Sunday
-    2, // July 1, 2025 is Tuesday
-    5, // August 1, 2025 is Friday
-    1, // September 1, 2025 is Monday
-    3, // October 1, 2025 is Wednesday
-    6, // November 1, 2025 is Saturday
-    1  // December 1, 2025 is Monday
+    3, // January 1, 2025, is Wednesday
+    6, // February 1, 2025, is Saturday
+    6, // March 1, 2025, is Saturday
+    2, // April 1, 2025, is Tuesday
+    4, // May 1, 2025, is Thursday
+    0, // June 1, 2025, is Sunday
+    2, // July 1, 2025, is Tuesday
+    5, // August 1, 2025, is Friday
+    1, // September 1, 2025, is Monday
+    3, // October 1, 2025, is Wednesday
+    6, // November 1, 2025, is Saturday
+    1  // December 1, 2025, is Monday
 };
 
 State transition_table[NUM_STATES][NUM_EVENTS] = {
