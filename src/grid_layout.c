@@ -42,23 +42,6 @@ void Grid_Layout(JournalC99 *journalC99)
 
       switch (map[row][col])
       {
-      case BTN_B:
-        if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                                  cell.height - 2 * CELL_MARGIN},
-                      TextFormat("B: %d,%d ", row, col)))
-        {
-          Update_State(journalC99, evt_btn_month);
-        }
-        break;
-
-      case BTN_C:
-        if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                                  cell.height - 2 * CELL_MARGIN},
-                      TextFormat("C: %d", col)))
-        {
-          Update_State(journalC99, evt_btn_today);
-        }
-        break;
       case TOGGLE_GROUP:
       {
         int stateOffset = 1;
