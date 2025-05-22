@@ -139,7 +139,7 @@ void Grid_Layout(JournalC99 *journalC99)
                  "Sat");
         break;
       case ELMNT_MONTH:
-        DrawText(current_month_name, (int)cell.x, (int)cell.y, 32, RAYWHITE);
+        DrawText(current_month_name, (int)cell.x, (int)cell.y, 24, RAYWHITE);
         break;
       case ELMNT_TEXT:
         DrawText(current_month_name, (int)cell.x, (int)cell.y, 32, RAYWHITE);
