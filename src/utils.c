@@ -92,7 +92,7 @@ int (*Return_Map_Pr(const State state))[12]
       {
           TOGGLE_GROUP,
       },
-      {ELMNT_MONTH, ELMNT_CURR_DAY}};
+      {ELMNT_MONTH, ELMNT_CURR_DAY_NAME}};
 
   static int map_state_month[SIZE_ROW][SIZE_COL] = {
       {

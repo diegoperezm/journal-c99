@@ -71,7 +71,7 @@ typedef struct
   X(ELMNT_SATURDAY)                                                            \
   X(ELMNT_MONTH)                                                               \
   X(ELMNT_TEXT)                                                                \
-  X(ELMNT_CURR_DAY)                                                            \
+  X(ELMNT_CURR_DAY_NAME)                                                            \
   X(ELMNT_NUM)
 
 #define X(element) element,

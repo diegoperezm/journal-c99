@@ -136,7 +136,7 @@ void Grid_Layout(JournalC99 *journalC99)
         DrawText(current_month_name, (int)cell.x, (int)cell.y, 32, RAYWHITE);
         break;
 
-      case ELMNT_CURR_DAY:
+      case ELMNT_CURR_DAY_NAME:
         DrawText(current_day_name, (int)cell.x, (int)cell.y, fontSize * 2, font_color);
         break;
 
