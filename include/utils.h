@@ -70,6 +70,7 @@ typedef struct
   X(ELMNT_FRIDAY)                                                              \
   X(ELMNT_SATURDAY)                                                            \
   X(ELMNT_MONTH)                                                               \
+  X(ELMNT_TEXT)                                                                \
   X(ELMNT_NUM)
 
 #define X(element) element,
