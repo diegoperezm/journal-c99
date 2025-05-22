@@ -139,14 +139,10 @@ void Grid_Layout(JournalC99 *journalC99)
                  "Sat");
         break;
       case ELMNT_MONTH:
-        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                             cell.height - 2 * CELL_MARGIN},
-                 current_month_name);
+        DrawText(current_month_name, (int)cell.x, (int)cell.y, 32, RAYWHITE);
         break;
       case ELMNT_TEXT:
-        GuiTextBox((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                               cell.height - 2 * CELL_MARGIN},
-                   current_month_name, 25000, false);
+        DrawText(current_month_name, (int)cell.x, (int)cell.y, 32, RAYWHITE);
         break;
 
       default:

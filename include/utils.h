@@ -137,10 +137,12 @@ typedef struct
 } Data;
 
 extern char *element_list[];
-char * current_month_name;
+char *current_month_name;
 int (*Return_Map_Pr(State state))[12];
 
 // forward declaration to avoid
+void DrawText(const char *text, int posX, int posY, int fontSize, Color color);       // Draw text (using default font)
+int GuiTextBox(Rectangle bounds, char *text, int textSize, bool editMode);
 int GuiLabel(Rectangle bounds, const char *text);
 int GuiButton(Rectangle bounds, const char *text);
 void Grid_Layout(JournalC99 *journalC99);
