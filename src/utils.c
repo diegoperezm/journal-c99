@@ -21,6 +21,9 @@ char *month[12] = {
     "July",    "August",   "September", "October", "November", "December",
 };
 
+char *daysOfWeek[] = {"Sunday",   "Monday", "Tuesday", "Wednesday",
+                      "Thursday", "Friday", "Saturday"};
+
 uint8_t days_in_month[12] = {
     31, // January
     28, // February (2025 is not a leap year)
@@ -76,23 +79,24 @@ State Update_State(JournalC99 *journalC99, Event event)
   return journalC99->currentState = nextState;
 }
 
-int (*Return_Map_Pr(State state))[12]
+int (*Return_Map_Pr(const State state))[12]
 {
   static int map[5][12] = {0};
   time_t now = time(NULL);
   struct tm *tm_now = localtime(&now);
-  uint8_t current_day = (uint8_t)tm_now->tm_wday;
+  uint8_t current_week_day = (uint8_t)tm_now->tm_wday;
   uint8_t current_month = (uint8_t)tm_now->tm_mon;
   current_month_name = month[current_month];
+  current_day_name = daysOfWeek[current_week_day];
   uint8_t day = 1;
 
-  static int map_state_root_today[12][12] = {
+  static int map_state_root_today[SIZE_ROW][SIZE_COL] = {
       {
           TOGGLE_GROUP,
       },
-  };
+      {ELMNT_MONTH, ELMNT_CURR_DAY}};
 
-  static int map_state_month[12][12] = {
+  static int map_state_month[SIZE_ROW][SIZE_COL] = {
       {
           TOGGLE_GROUP,
       },
