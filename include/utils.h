@@ -8,7 +8,7 @@
 
 #define GRID_COLS 12
 
-#define GRID_ROWS 8
+#define GRID_ROWS 12
 
 #define GRID_PADDING 10.0F
 #define CELL_MARGIN 5.0F
