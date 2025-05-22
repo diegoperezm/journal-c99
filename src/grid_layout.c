@@ -8,6 +8,8 @@ void Grid_Layout(JournalC99 *journalC99)
 
   Color font_color = GetColor(GuiGetStyle(0, 2));
 
+  int fontSize = height * 0.02f;
+
   const Rectangle container = {.x = GRID_PADDING,
                                .y = GRID_PADDING,
                                .width = width - 2 * GRID_PADDING,
@@ -102,46 +104,32 @@ void Grid_Layout(JournalC99 *journalC99)
         break;
 
       case ELMNT_SUNDAY:
-        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                             cell.height - 2 * CELL_MARGIN},
-                 "Sun");
+        DrawText("Sun", (int)cell.x, (int)cell.y, fontSize, font_color);
         break;
 
       case ELMNT_MONDAY:
-        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                             cell.height - 2 * CELL_MARGIN},
-                 "Mon");
+        DrawText("Mon", (int)cell.x, (int)cell.y, fontSize, font_color);
         break;
 
       case ELMNT_TUESDAY:
-        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                             cell.height - 2 * CELL_MARGIN},
-                 "Tues");
+        DrawText("Tues", (int)cell.x, (int)cell.y, fontSize, font_color);
         break;
 
       case ELMNT_WEDNESDAY:
-        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                             cell.height - 2 * CELL_MARGIN},
-                 "Wednes");
+        DrawText("Wednes", (int)cell.x, (int)cell.y, fontSize, font_color);
         break;
 
       case ELMNT_THURSDAY:
-        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                             cell.height - 2 * CELL_MARGIN},
-                 "Thurs");
+        DrawText("Thurs", (int)cell.x, (int)cell.y, fontSize, font_color);
         break;
       case ELMNT_FRIDAY:
-        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                             cell.height - 2 * CELL_MARGIN},
-                 "Fri");
+        DrawText("Fri", (int)cell.x, (int)cell.y, fontSize, font_color);
         break;
       case ELMNT_SATURDAY:
-        GuiLabel((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                             cell.height - 2 * CELL_MARGIN},
-                 "Sat");
+        DrawText("Sat", (int)cell.x, (int)cell.y, fontSize, font_color);
         break;
       case ELMNT_MONTH:
-        DrawText(current_month_name, (int)cell.x, (int)cell.y, 24, font_color);
+        DrawText(current_month_name, (int)cell.x, (int)cell.y, fontSize * 2, font_color);
         break;
       case ELMNT_TEXT:
         DrawText(current_month_name, (int)cell.x, (int)cell.y, 32, RAYWHITE);
