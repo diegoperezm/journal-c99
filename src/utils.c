@@ -54,6 +54,10 @@ uint8_t first_day_in_month[12] = {
     1  // December 1, 2025, is Monday
 };
 
+char *current_month_name = NULL;
+char *current_day_name   = NULL;
+char current_day_number[3] = {0};
+
 State transition_table[NUM_STATES][NUM_EVENTS] = {
 
     /*             evt_btn_today | evt_btn_month | evt_btn_year | evt_btn_graph

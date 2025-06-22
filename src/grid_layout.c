@@ -1,10 +1,16 @@
 #include "../include/utils.h"
 #include "raylib.h"
+#include <stddef.h>
 
 void Grid_Layout(JournalC99 *journalC99)
 {
   const float width = (float)GetScreenWidth();
   const float height = (float)GetScreenHeight();
+
+  extern char *current_month_name;
+  extern char *current_day_name;
+  extern char current_day_number[3];
+
 
   Color font_color = GetColor(GuiGetStyle(0, 2));
 

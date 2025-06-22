@@ -138,9 +138,6 @@ typedef struct
 } Data;
 
 extern char *element_list[];
-char *current_month_name;
-char *current_day_name;
-char current_day_number[3];
 int (*Return_Map_Pr(State state))[12];
 
 // forward declaration to avoid

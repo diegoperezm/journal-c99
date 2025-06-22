@@ -37,17 +37,21 @@ target_compile_definitions(journal-c99 PRIVATE RAYGUI_IMPLEMENTATION)
 target_link_libraries(journal-c99 raylib)
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(GRAPHVIZ REQUIRED libgvc)
+#pkg_check_modules(GRAPHVIZ libgvc)
 
-# Include directories for Graphviz headers
-include_directories(${GRAPHVIZ_INCLUDE_DIRS})
-link_directories(${GRAPHVIZ_LIBRARY_DIRS})
+if(GRAPHVIZ_FOUND)
+  message(STATUS "Graphviz support enabled")
 
-# Add the source file for your project
-add_executable(ggen graph/gen_graph.c src/utils.c)
-
-# Link Graphviz libraries
-target_link_libraries(ggen PRIVATE raylib  ${GRAPHVIZ_LIBRARIES})
+  # Include directories for Graphviz headers
+  include_directories(${GRAPHVIZ_INCLUDE_DIRS})
+  link_directories(${GRAPHVIZ_LIBRARY_DIRS})
+  # Add the source file for your project
+  add_executable(ggen graph/gen_graph.c src/utils.c)
+  # Link Graphviz libraries
+  target_link_libraries(ggen PRIVATE raylib  ${GRAPHVIZ_LIBRARIES})
+else()
+  message(WARNING "Graphviz not found, continuing without it")
+endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
 
