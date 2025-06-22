@@ -82,7 +82,7 @@ void Grid_Layout(JournalC99 *journalC99)
 
         break;
       }
-      case ELMNT_DAY:
+      case ELMNT_CAL_DAY:
         if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
                                   cell.height - 2 * CELL_MARGIN},
                       TextFormat("%d", i++)))

@@ -57,7 +57,7 @@ typedef struct
 
 #define ELEMENT_LIST                                                           \
   X(ELMNT_BLANK)                                                               \
-  X(ELMNT_DAY)                                                                 \
+  X(ELMNT_CAL_DAY)                                                                 \
   X(TOGGLE_GROUP)                                                              \
   X(ELMNT_LABEL)                                                               \
   X(ELMNT_SUNDAY)                                                              \

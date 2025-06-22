@@ -154,7 +154,7 @@ int (*Return_Map_Pr(const State state))[12]
       {
         if (i == 0 && j < first_day_in_month[current_month])
           continue;
-        map_state_month[i + 3][j + 2] = ELMNT_DAY;
+        map_state_month[i + 3][j + 2] = ELMNT_CAL_DAY;
         day++;
       }
     }
