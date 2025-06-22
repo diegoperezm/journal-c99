@@ -9,7 +9,7 @@ int main(void) {
   int screenH = 600;
 
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-  InitWindow(screenW, screenH, "Media Player");
+  InitWindow(screenW, screenH, "Journal");
   SetTargetFPS(24);
 
   GuiLoadStyleCyber();
