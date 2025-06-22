@@ -30,10 +30,10 @@ void Grid_Layout(JournalC99 *journalC99)
   const int(*map)[12] = Return_Map_Pr(journalC99->currentState);
 
   int i = 1;
-  for (size_t row = 0; row < SIZE_ROW; row++)
+  for (int row = 0; row < SIZE_ROW; row++)
   {
 
-    for (size_t col = 0; col < SIZE_COL; col++)
+    for (int col = 0; col < SIZE_COL; col++)
     {
 
       float cell_x = (container.x + GRID_PADDING +
