@@ -1,29 +1,20 @@
-#include "../include/raygui.h"
-#include "../include/style_cyber.h"
-#include "../include/utils.h"
 #include <raylib.h>
+#include "../include/utils.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 int main(void) {
 
-  int screenW = 800;
-  int screenH = 600;
-
-  SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-  InitWindow(screenW, screenH, "Media Player");
-  SetTargetFPS(24);
-
-  GuiLoadStyleCyber();
-
+  const Color BGCOLOR = (Color){1,34,43,255};
   JournalC99 journalC99 = { .currentState = STATE_ROOT_TODAY };
+  setup_raylib();
 
   while (!WindowShouldClose()) {
 
     // Begin
     BeginDrawing();
-    ClearBackground(
-        GetColor((unsigned int)GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
-
-    Grid_Layout(&journalC99);
+      ClearBackground(BGCOLOR);
+      grid_layout(&journalC99);
     EndDrawing();
     // End
   }

@@ -1,22 +1,32 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-// if #include "../include/raygui.h" I get ->  "redefinition of guiIcons""
 #include <raylib.h>
+#include <stdint.h>
+#include <sys/time.h>
 
-#define GRID_COLS 12
+#define GRID_COLS 12.0f
+#define GRID_ROWS 12.0f
+#define GRID_PADDING 10.0f
+#define GRID_PADDING 10.0f
+#define CELL_MARGIN 12.0f
 
-#define GRID_ROWS 8
+#define MAX_PROJECTS 4
+#define MAX_MONTHS 12
+#define MAX_DAYS_IN_MONTH 31
+#define MAX_PROJECT_NAME_LEN 64
+#define MAX_COMMENT_LEN 256
+#define MAX_TIME_STRING_LEN 6
 
-#define GRID_PADDING 10.0F
-#define CELL_MARGIN 5.0F
+#define SIZE_COLS 12
+#define SIZE_ROWS 12
 
 #define STATE_TABLE                                                            \
-  X(INVALID_STATE)                                                             \
   X(STATE_ROOT_TODAY)                                                          \
   X(STATE_MONTH)                                                               \
   X(STATE_YEAR)                                                                \
   X(STATE_GRAPH)                                                               \
+  X(INVALID_STATE)                                                             \
   X(NUM_STATES)
 
 #define EVENT_TABLE                                                            \
@@ -40,6 +50,7 @@ typedef enum
 } Event;
 #undef X
 
+
 extern char *state_name[];
 extern char *event_name[];
 
@@ -55,9 +66,7 @@ typedef struct
 
 #define ELEMENT_LIST                                                           \
   X(ELMNT_BLANK)                                                               \
-  X(ELMNT_DAY)                                                                 \
-  X(BTN_B)                                                                     \
-  X(BTN_C)                                                                     \
+  X(ELMNT_CAL_DAY)                                                                 \
   X(TOGGLE_GROUP)                                                              \
   X(ELMNT_LABEL)                                                               \
   X(ELMNT_SUNDAY)                                                              \
@@ -67,6 +76,10 @@ typedef struct
   X(ELMNT_THURSDAY)                                                            \
   X(ELMNT_FRIDAY)                                                              \
   X(ELMNT_SATURDAY)                                                            \
+  X(ELMNT_MONTH)                                                               \
+  X(ELMNT_TEXT)                                                                \
+  X(ELMNT_CURR_DAY_NAME)                                                       \
+  X(ELMNT_CURR_DAY_NUMBER)                                                     \
   X(ELMNT_NUM)
 
 #define X(element) element,
@@ -76,14 +89,10 @@ typedef enum
 } Element;
 #undef X
 
+void setup_raylib(void);
+void grid_layout(JournalC99 *journalC99);
 extern char *element_list[];
-int (*Return_Map_Pr(State state))[12];
-
-// forward declaration to avoid
-int GuiLabel(Rectangle bounds, const char *text);
-int GuiButton(Rectangle bounds, const char *text);
-void Grid_Layout(JournalC99 *journalC99);
-int GuiToggleGroup(Rectangle bounds, const char *text, int *active);
+int (*Return_Map_Pr(State state))[SIZE_ROWS][SIZE_COLS];
 State Update_State(JournalC99 *journalC99, Event event);
-
 #endif
+

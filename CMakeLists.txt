@@ -5,6 +5,13 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+
+if(NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
+message(STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
+
 # from clay github.com/nicbarker/clay
 # Adding Raylib
 include(FetchContent)
@@ -25,59 +32,39 @@ FetchContent_MakeAvailable(raylib)
 message(STATUS "raylib downloaded to: ${raylib_SOURCE_DIR}")
 
 include_directories(include)
-include_directories(graph)
-
-
 file(GLOB SOURCES "src/*.c")
-file(GLOB GSOURCES "graph/*.c")
-
 add_executable(journal-c99 ${SOURCES})
 
 target_compile_definitions(journal-c99 PRIVATE RAYGUI_IMPLEMENTATION)
 target_link_libraries(journal-c99 raylib)
 
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(GRAPHVIZ REQUIRED libgvc)
 
-# Include directories for Graphviz headers
-include_directories(${GRAPHVIZ_INCLUDE_DIRS})
-link_directories(${GRAPHVIZ_LIBRARY_DIRS})
+set(CMAKE_C_FLAGS_DEBUG "-std=c99 -g3 -Wall -Werror -Wconversion -Wdouble-promotion -fsanitize=address,undefined -Wno-unused-parameter -Wno-unused-function -Wno-sign-conversion")
 
-# Add the source file for your project
-add_executable(ggen graph/gen_graph.c src/utils.c)
+set(CMAKE_C_FLAGS_RELEASE "-std=c99")
 
-# Link Graphviz libraries
-target_link_libraries(ggen PRIVATE raylib  ${GRAPHVIZ_LIBRARIES})
-
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
-
-#message(STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
-
-# Configuración específica para debug, "d" minúscula
-# cmake -DCMAKE_BUILD_TYPE=debug ..
-if (CMAKE_BUILD_TYPE STREQUAL "debug")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} \
-    -std=c99 \
-    -g3      \
-    -Wall    \
-    -Werror  \
-    -Wconversion \
-    -Wdouble-promotion \
-    -fsanitize=address,undefined \
-    -Wno-unused-parameter \
-    -Wno-unused-function \
-    -Wno-sign-conversion")
-
-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}  \
-    -std=c99 \
-    -g3      \
-    -Wall    \
-    -Werror  \
-    -Wconversion \
-    -Wdouble-promotion \
-    -fsanitize=address,undefined \
-    -Wno-unused-parameter \
-    -Wno-unused-function \
-    -Wno-sign-conversion")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  set(EXECUTABLE_NAME "debug_journal-c99")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+  set(EXECUTABLE_NAME "release_journal-c99")
+else() 
+  set(EXECUTABLE_NAME "else_journal-c99")
 endif()
+
+add_executable(${EXECUTABLE_NAME} ${SOURCES})
+target_compile_definitions(${EXECUTABLE_NAME} PRIVATE RAYGUI_IMPLEMENTATION)
+target_link_libraries(${EXECUTABLE_NAME} raylib)
+
+#  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}  \
+#    -std=c99 \
+#    -g3      \
+#    -Wall    \
+#    -Werror  \
+#    -Wconversion \
+#    -Wdouble-promotion \
+#    -fsanitize=address,undefined \
+#    -Wno-unused-parameter \
+#    -Wno-unused-function \
+#    -Wno-sign-conversion")
+#endif()
 
