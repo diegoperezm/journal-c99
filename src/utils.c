@@ -279,8 +279,8 @@ void setup_raylib(void) {
   int screenW = 800;
   int screenH = 600;
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-  InitWindow(screenW, screenH, "Media Player");
-  SetTargetFPS(24);
+  InitWindow(screenW, screenH, "Journal");
+  SetTargetFPS(30);
   GuiLoadStyleCyber();
 }
 
