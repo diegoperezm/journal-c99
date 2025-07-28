@@ -99,18 +99,18 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
   uint8_t day = 1;
 
   static int map_state_root_today[SIZE_ROWS][SIZE_COLS] = {
-      { TOGGLE_GROUP },
+      {TOGGLE_GROUP },
       {ELMNT_BLANK},
-      {ELMNT_BLANK, ELMNT_MONTH, ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
-      {0},
-      {0},
-      {0},
-      {0},
-      {0},
-      {0},    
-      {0},
-      {0},
-      {0},
+      {ELMNT_BLANK,ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_MONTH,ELMNT_BLANK, ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},    
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
       };
   
   static int map_state_month[SIZE_ROWS][SIZE_COLS] = {
@@ -263,16 +263,15 @@ void grid_layout(JournalC99 *journalC99)
         break;
 
       case ELMNT_TEXT:
-        DrawText(current_month_name, (int)cell.x, (int)cell.y, 32, RAYWHITE);
+        DrawText(current_month_name, (int)cell.x, (int)cell.y, font_size, RAYWHITE);
         break;
 
       case ELMNT_CURR_DAY_NAME:
-        DrawText(current_day_name, (int)cell.x, (int)cell.y, font_size, font_color);
+        DrawText(current_day_name, (int)cell.x-(cell_width/2), (int)cell.y, font_size, font_color);
         break;
 
       case ELMNT_CURR_DAY_NUMBER:
-        DrawText(current_day_number, (int)cell.x, (int)cell.y, font_size * 2,
-                 font_color);
+        DrawText(current_day_number, (int)cell.x, (int)cell.y, font_size, font_color);
         break;
       default:
         break;
