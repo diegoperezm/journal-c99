@@ -101,7 +101,7 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
   static int map_state_root_today[SIZE_ROWS][SIZE_COLS] = {
       { TOGGLE_GROUP },
       {ELMNT_BLANK},
-      {ELMNT_BLANK,ELMNT_MONTH, ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
+      {ELMNT_BLANK, ELMNT_MONTH, ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
       {0},
       {0},
       {0},
@@ -195,11 +195,12 @@ void grid_layout(JournalC99 *journalC99)
   const float cell_width = width / GRID_COLS;
   const float cell_height = height / GRID_ROWS;
   const Color font_color = GetColor(GuiGetStyle(0, 2));
-  const int font_size = (int) (cell_height / cell_width);
+  const int font_size = (int)(cell_width*0.5f);
 
   const int(*map)[SIZE_ROWS][SIZE_COLS] = Return_Map_Pr(journalC99->currentState);
 
   int i = 1;
+  int temp = journalC99->currentState;
 
   for(int row=0;  row<SIZE_ROWS; row++) {
     for(int col=0; col<SIZE_COLS; col++) {
@@ -209,7 +210,6 @@ void grid_layout(JournalC99 *journalC99)
 
        switch ((*map)[row][col]) {
          case TOGGLE_GROUP:
-          int temp = journalC99->currentState;
           GuiToggleGroup((Rectangle){cell.x, cell.y, cell.width, cell.height}, "TODAY;MONTH;YEAR;GRAPH", &temp);
 
           if(temp != journalC99->currentState) { 
@@ -225,9 +225,7 @@ void grid_layout(JournalC99 *journalC99)
           break;
 
       case ELMNT_CAL_DAY:
-        if (GuiButton((Rectangle){cell.x, cell.y, cell.width - 2 * CELL_MARGIN,
-                                  cell.height - 2 * CELL_MARGIN},
-                      TextFormat("%d", i++)))
+        if (GuiButton((Rectangle){cell.x, cell.y, cell.width, cell.height}, TextFormat("%d", i++)))
 
         {
           Update_State(journalC99, evt_btn_today);
@@ -235,7 +233,7 @@ void grid_layout(JournalC99 *journalC99)
         break;
 
       case ELMNT_SUNDAY:
-        DrawText("Sun", (int)cell.x+cell_width, (int)cell.y+cell_height, font_size*cell_height, font_color);
+        DrawText("Sun", (int)cell.x*cell_width, (int)cell.y*cell_height, font_size, font_color);
         break;
 
       case ELMNT_MONDAY:
@@ -259,17 +257,17 @@ void grid_layout(JournalC99 *journalC99)
       case ELMNT_SATURDAY:
         DrawText("Sat", (int)cell.x, (int)cell.y, font_size, font_color);
         break;
+
       case ELMNT_MONTH:
-        DrawText(current_month_name, (int)cell.x, (int)cell.y, font_size * 2,
-                 font_color);
+        DrawText(current_month_name, (int)cell.x, (int)cell.y, font_size, font_color);
         break;
+
       case ELMNT_TEXT:
         DrawText(current_month_name, (int)cell.x, (int)cell.y, 32, RAYWHITE);
         break;
 
       case ELMNT_CURR_DAY_NAME:
-        DrawText(current_day_name, (int)cell.x, (int)cell.y, font_size * 2,
-                 font_color);
+        DrawText(current_day_name, (int)cell.x, (int)cell.y, font_size, font_color);
         break;
 
       case ELMNT_CURR_DAY_NUMBER:
