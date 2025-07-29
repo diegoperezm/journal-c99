@@ -5,11 +5,11 @@
 #include <stdint.h>
 #include <sys/time.h>
 
-#define GRID_COLS 12.0f
-#define GRID_ROWS 12.0f
-#define GRID_PADDING 10.0f
-#define GRID_PADDING 10.0f
-#define CELL_MARGIN 12.0f
+#define GRID_COLS 12.0F
+#define GRID_ROWS 12.0F
+#define GRID_PADDING 10.0F
+#define GRID_PADDING 10.0F
+#define CELL_MARGIN 12.0F
 
 #define MAX_PROJECTS 4
 #define MAX_MONTHS 12

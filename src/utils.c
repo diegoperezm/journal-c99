@@ -98,9 +98,6 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
   current_day_name = daysOfWeek[current_week_day];
   uint8_t day = 1;
 
-  const int offset_col = 3;
-  const int offset_row = 5;
-
   static int map_state_root_today[SIZE_ROWS][SIZE_COLS] = {
       {TOGGLE_GROUP },
       {ELMNT_BLANK},
@@ -155,6 +152,8 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
     {
       for (int j = 0; j < 7 && day <= days_in_month[current_month]; ++j)
       {
+        const int offset_row = 5;
+        const int offset_col = 3;
         if (i == 0 && j < first_day_in_month[current_month])
           continue;
         map_state_month[i+offset_row][j+offset_col] = ELMNT_CAL_DAY;
@@ -181,16 +180,16 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
 
 void grid_layout(JournalC99 *journalC99)
 {
-  extern char *current_month_name;
-  extern char *current_day_name;
-  extern char current_day_number[3];
+//  extern char *current_month_name;
+// extern char *current_day_name;
+//  extern char current_day_number[3];
 
   const float width = (float)GetScreenWidth();
   const float height = (float)GetScreenHeight();
   const float cell_width = width / GRID_COLS;
   const float cell_height = height / GRID_ROWS;
   const Color font_color = GetColor(GuiGetStyle(0, 2));
-  const int font_size = (int)(cell_width*0.5f);
+  const int font_size = (int)(cell_width*0.5F);
   const int font_size_week_day = (int)(font_size/2);
   const int(*map)[SIZE_ROWS][SIZE_COLS] = Return_Map_Pr(journalC99->currentState);
 
@@ -202,7 +201,6 @@ void grid_layout(JournalC99 *journalC99)
        const float cell_x =(float) col * cell_width;
        const float cell_y =(float) row * cell_height;
        const Rectangle cell = {cell_x, cell_y, cell_width, cell_height};
-       const Rectangle week_day_bounds = {cell_x*cell_width, cell_y*cell_height, cell_width, cell_height};
        switch ((*map)[row][col]) {
          case TOGGLE_GROUP:
           GuiToggleGroup((Rectangle){cell.x, cell.y, cell.width, cell.height}, "TODAY;MONTH;YEAR;GRAPH", &temp);
@@ -220,7 +218,7 @@ void grid_layout(JournalC99 *journalC99)
           break;
 
       case ELMNT_CAL_DAY:
-        if (GuiButton((Rectangle){cell.x, cell.y,(int) cell.width-(cell.width*0.05f),(int)cell.height-(cell_height*0.05f)}, TextFormat("%d", i++)))
+        if (GuiButton((Rectangle){cell.x, cell.y,cell.width-(cell.width*0.05F),cell.height-(cell_height*0.05F)}, TextFormat("%d", i++)))
 
         {
           Update_State(journalC99, evt_btn_today);
@@ -262,7 +260,7 @@ void grid_layout(JournalC99 *journalC99)
         break;
 
       case ELMNT_CURR_DAY_NAME:
-        DrawText(current_day_name, (int)cell.x-(cell_width/2), (int)cell.y, font_size, font_color);
+        DrawText(current_day_name, (int)cell.x-((int)cell_width/2), (int)cell.y, font_size, font_color);
         break;
 
       case ELMNT_CURR_DAY_NUMBER:
