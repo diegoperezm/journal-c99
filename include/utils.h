@@ -1,10 +1,5 @@
 #ifndef UTILS_H
 #define UTILS_H
-
-#include <raylib.h>
-#include <stdint.h>
-#include <sys/time.h>
-
 #define GRID_COLS 12.0F
 #define GRID_ROWS 12.0F
 #define GRID_PADDING 10.0F
