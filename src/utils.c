@@ -285,8 +285,8 @@ uint8_t first_day_in_month[12] = {
 uint8_t current_month  = 0; 
 char *current_month_name = NULL;
 char *current_day_name   = NULL;
-char current_day_number[3] = {0};
-char selected_cal_day_number[3] = {0};
+char current_day_number[4] = {0};
+char selected_cal_day_number[4] = {0};
 
 int dropdownActive = 0;        
 bool dropdownEditMode = false; 
@@ -315,7 +315,7 @@ State Update_State(JournalC99 *journalC99, Event event)
                         ? transition_table[currentState][event]
                         : currentState;
 
-  printf("| %10s | %10s | %10s |\n", state_name[currentState], event_name[event], state_name[nextState]);
+  //printf("| %10s | %10s | %10s |\n", state_name[currentState], event_name[event], state_name[nextState]);
   return journalC99->currentState = nextState;
 }
 
