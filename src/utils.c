@@ -508,7 +508,7 @@ void grid_layout(JournalC99 *journalC99)
         break;
 
       case ELMNT_CURR_DAY_NUMBER:
-        DrawText(current_day_number, (int)cell.x+cell_width, (int)cell.y, font_size, font_color);
+        DrawText(current_day_number, (int)cell.x+((int)cell_width), (int)cell.y, font_size, font_color);
         break;
 
       case ELMNT_SELECTED_CAL_MONTH:
@@ -520,7 +520,7 @@ void grid_layout(JournalC99 *journalC99)
         break;
 
        case ELMNT_SELECTED_CAL_DAY_NUMBER:
-        DrawText(journalC99->context.selected_cal_day_number, (int)cell.x+cell_width, (int)cell.y, font_size, font_color);
+        DrawText(journalC99->context.selected_cal_day_number, (int)cell.x+((int)cell_width), (int)cell.y, font_size, font_color);
         break;
      
       case ELMNT_SELECT_PROYECT:
@@ -531,11 +531,11 @@ void grid_layout(JournalC99 *journalC99)
         break;
 
       case ELMNT_TITLE_PROYECT: 
-         DrawText("Name", cell.x, cell.y,(int)font_size/2, GRAY);
+         DrawText("Name", (int)cell.x,(int) cell.y,(int)font_size/2, GRAY);
          break;
 
       case ELMNT_TITLE_START: 
-         DrawText("Start   hh : mm",cell.x, cell.y,(int)font_size/2, GRAY);
+         DrawText("Start   hh : mm",(int)cell.x,(int)cell.y,(int)font_size/2, GRAY);
          break;
 
       case ELMNT_START_TIME_HOURS: 
@@ -546,7 +546,7 @@ void grid_layout(JournalC99 *journalC99)
          break;
 
       case ELMNT_TITLE_END: 
-         DrawText("End     hh : mm",cell.x, cell.y,(int)font_size/2, GRAY);
+         DrawText("End     hh : mm",(int)cell.x,(int)cell.y,(int)font_size/2, GRAY);
          break;
 
       case ELMNT_END_TIME_HOURS: 
@@ -566,8 +566,8 @@ void grid_layout(JournalC99 *journalC99)
 }
 
 void setup_raylib(void) {
-  int screenW = 800;
-  int screenH = 600;
+  const int screenW = 900;
+  const int screenH = 600;
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);
   InitWindow(screenW, screenH, "Journal");
   SetTargetFPS(30);
