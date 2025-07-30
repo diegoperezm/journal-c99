@@ -21,6 +21,7 @@
   X(STATE_MONTH)                                                               \
   X(STATE_YEAR)                                                                \
   X(STATE_GRAPH)                                                               \
+  X(STATE_CAL_DAY)                                                             \
   X(INVALID_STATE)                                                             \
   X(NUM_STATES)
 
@@ -29,6 +30,7 @@
   X(evt_btn_month)                                                             \
   X(evt_btn_year)                                                              \
   X(evt_btn_graph)                                                             \
+  X(evt_btn_cal_day)                                                           \
   X(NUM_EVENTS)
 
 #define X(state) state,
@@ -54,14 +56,15 @@ extern State transition_table[NUM_STATES][NUM_EVENTS];
 typedef struct
 {
   State currentState;
-  //  struct {
-  //   const char* display;
-  // } context;
+    struct {
+     char *selected_cal_month;
+     char *selected_cal_day; 
+     char *selected_cal_day_number; 
+    } context;
 } JournalC99;
 
 #define ELEMENT_LIST                                                           \
   X(ELMNT_BLANK)                                                               \
-  X(ELMNT_CAL_DAY)                                                                 \
   X(TOGGLE_GROUP)                                                              \
   X(ELMNT_LABEL)                                                               \
   X(ELMNT_SUNDAY)                                                              \
@@ -75,6 +78,10 @@ typedef struct
   X(ELMNT_TEXT)                                                                \
   X(ELMNT_CURR_DAY_NAME)                                                       \
   X(ELMNT_CURR_DAY_NUMBER)                                                     \
+  X(ELMNT_CAL_DAY)                                                             \
+  X(ELMNT_SELECTED_CAL_MONTH)                                                  \
+  X(ELMNT_SELECTED_CAL_DAY)                                                    \
+  X(ELMNT_SELECTED_CAL_DAY_NUMBER)                                             \
   X(ELMNT_NUM)
 
 #define X(element) element,

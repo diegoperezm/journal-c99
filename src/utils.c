@@ -20,13 +20,220 @@ char *event_name[] = {EVENT_TABLE};
 char *element_list[] = {ELEMENT_LIST};
 #undef X
 
-char *month[12] = {
-    "January", "February", "March",     "April",   "May",      "June",
-    "July",    "August",   "September", "October", "November", "December",
+// @formatter:off
+char *days_of_week_year_2025[365] = {
+    "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday",  // Jan 1-7
+    "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday",  // Jan 8-14
+    "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday",  // Jan 15-21
+    "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday",  // Jan 22-28
+    "Wednesday", "Thursday", "Friday",                                             // Jan 29-31
+
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Feb 1-7
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Feb 8-14
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Feb 15-21
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Feb 22-28
+
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Mar 1-7
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Mar 8-14
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Mar 15-21
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Mar 22-28
+    "Saturday", "Sunday", "Monday",                                                // Mar 29-31
+
+    "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday",  // Apr 1-7
+    "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday",  // Apr 8-14
+    "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday",  // Apr 15-21
+    "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday",  // Apr 22-28
+    "Tuesday", "Wednesday",                                                        // Apr 29-30
+
+    "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday",  // May 1-7
+    "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday",  // May 8-14
+    "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday",  // May 15-21
+    "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday",  // May 22-28
+    "Thursday", "Friday", "Saturday",                                              // May 29-31
+
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",  // Jun 1-7
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",  // Jun 8-14
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",  // Jun 15-21
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",  // Jun 22-28
+    "Sunday", "Monday",                                                            // Jun 29-30
+
+    "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday",  // Jul 1-7
+    "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday",  // Jul 8-14
+    "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday",  // Jul 15-21
+    "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday",  // Jul 22-28
+    "Tuesday", "Wednesday", "Thursday",                                            // Jul 29-31
+
+    "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",  // Aug 1-7
+    "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",  // Aug 8-14
+    "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",  // Aug 15-21
+    "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",  // Aug 22-28
+    "Friday", "Saturday", "Sunday",                                                // Aug 29-31
+
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",  // Sep 1-7
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",  // Sep 8-14
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",  // Sep 15-21
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",  // Sep 22-28
+    "Monday", "Tuesday",                                                           // Sep 29-30
+
+    "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday",  // Oct 1-7
+    "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday",  // Oct 8-14
+    "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday",  // Oct 15-21
+    "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday",  // Oct 22-28
+    "Wednesday", "Thursday", "Friday",                                             // Oct 29-31
+
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Nov 1-7
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Nov 8-14
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Nov 15-21
+    "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",  // Nov 22-28
+    "Saturday", "Sunday",                                                          // Nov 29-30
+
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",  // Dec 1-7
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",  // Dec 8-14
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",  // Dec 15-21
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",  // Dec 22-28
+    "Monday", "Tuesday", "Wednesday"                                               // Dec 29-31
+};
+// @formatter:off
+
+
+// @formatter:off
+char *month_for_each_day_2025[365] = {
+    // January (31 days)
+    "January", "January", "January", "January", "January", "January", "January",
+    "January", "January", "January", "January", "January", "January", "January",
+    "January", "January", "January", "January", "January", "January", "January",
+    "January", "January", "January", "January", "January", "January", "January",
+    "January", "January", "January",
+    
+    // February (28 days - 2025 is not a leap year)
+    "February", "February", "February", "February", "February", "February", "February",
+    "February", "February", "February", "February", "February", "February", "February",
+    "February", "February", "February", "February", "February", "February", "February",
+    "February", "February", "February", "February", "February", "February", "February",
+    
+    // March (31 days)
+    "March", "March", "March", "March", "March", "March", "March",
+    "March", "March", "March", "March", "March", "March", "March",
+    "March", "March", "March", "March", "March", "March", "March",
+    "March", "March", "March", "March", "March", "March", "March",
+    "March", "March", "March",
+    
+    // April (30 days)
+    "April", "April", "April", "April", "April", "April", "April",
+    "April", "April", "April", "April", "April", "April", "April",
+    "April", "April", "April", "April", "April", "April", "April",
+    "April", "April", "April", "April", "April", "April", "April",
+    "April", "April",
+    
+    // May (31 days)
+    "May", "May", "May", "May", "May", "May", "May",
+    "May", "May", "May", "May", "May", "May", "May",
+    "May", "May", "May", "May", "May", "May", "May",
+    "May", "May", "May", "May", "May", "May", "May",
+    "May", "May", "May",
+    
+    // June (30 days)
+    "June", "June", "June", "June", "June", "June", "June",
+    "June", "June", "June", "June", "June", "June", "June",
+    "June", "June", "June", "June", "June", "June", "June",
+    "June", "June", "June", "June", "June", "June", "June",
+    "June", "June",
+    
+    // July (31 days)
+    "July", "July", "July", "July", "July", "July", "July",
+    "July", "July", "July", "July", "July", "July", "July",
+    "July", "July", "July", "July", "July", "July", "July",
+    "July", "July", "July", "July", "July", "July", "July",
+    "July", "July", "July",
+    
+    // August (31 days)
+    "August", "August", "August", "August", "August", "August", "August",
+    "August", "August", "August", "August", "August", "August", "August",
+    "August", "August", "August", "August", "August", "August", "August",
+    "August", "August", "August", "August", "August", "August", "August",
+    "August", "August", "August",
+    
+    // September (30 days)
+    "September", "September", "September", "September", "September", "September", "September",
+    "September", "September", "September", "September", "September", "September", "September",
+    "September", "September", "September", "September", "September", "September", "September",
+    "September", "September", "September", "September", "September", "September", "September",
+    "September", "September",
+    
+    // October (31 days)
+    "October", "October", "October", "October", "October", "October", "October",
+    "October", "October", "October", "October", "October", "October", "October",
+    "October", "October", "October", "October", "October", "October", "October",
+    "October", "October", "October", "October", "October", "October", "October",
+    "October", "October", "October",
+    
+    // November (30 days)
+    "November", "November", "November", "November", "November", "November", "November",
+    "November", "November", "November", "November", "November", "November", "November",
+    "November", "November", "November", "November", "November", "November", "November",
+    "November", "November", "November", "November", "November", "November", "November",
+    "November", "November",
+    
+    // December (31 days)
+    "December", "December", "December", "December", "December", "December", "December",
+    "December", "December", "December", "December", "December", "December", "December",
+    "December", "December", "December", "December", "December", "December", "December",
+    "December", "December", "December", "December", "December", "December", "December",
+    "December", "December", "December"
+};
+// @formatter:off
+
+// @formatter:off
+int number_days_in_every_month_of_year_2025[365] = {
+    // January (31 days) - days 1 to 31
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+    
+    // February (28 days) - days 1 to 28 (2025 is not a leap year)
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
+    
+    // March (31 days) - days 1 to 31
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+    
+    // April (30 days) - days 1 to 30
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+    
+    // May (31 days) - days 1 to 31
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+    
+    // June (30 days) - days 1 to 30
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+    
+    // July (31 days) - days 1 to 31
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+    
+    // August (31 days) - days 1 to 31
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+    
+    // September (30 days) - days 1 to 30
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+    
+    // October (31 days) - days 1 to 31
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+    
+    // November (30 days) - days 1 to 30
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+    
+    // December (31 days) - days 1 to 31
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+};
+// @formatter:off
+
+
+
+char *month[12] = { 
+  "January", "February", "March",     "April",   "May",      "June",
+  "July",    "August",   "September", "October", "November", "December",
 };
 
-char *daysOfWeek[] = {"Sunday",   "Monday", "Tuesday", "Wednesday",
-                      "Thursday", "Friday", "Saturday"};
+char *daysOfWeek[] = {
+ "Sunday",   "Monday", "Tuesday", "Wednesday",
+ "Thursday", "Friday", "Saturday"
+};
 
 uint8_t days_in_month[12] = {
     31, // January
@@ -41,6 +248,22 @@ uint8_t days_in_month[12] = {
     31, // October
     30, // November
     31  // December
+};
+
+
+uint16_t offset_days_in_month[12] = {
+    0, // January
+    31, // February (2025 is not a leap year)
+    59, // March
+    90, // April
+    120, // May
+    151, // June
+    182, // July
+    212, // August
+    243, // September
+    273,// October 
+    304,// November 
+    334,// December 
 };
 
 uint8_t first_day_in_month[12] = {
@@ -58,19 +281,22 @@ uint8_t first_day_in_month[12] = {
     1  // December 1, 2025, is Monday
 };
 
+uint8_t current_month  = 0; 
 char *current_month_name = NULL;
 char *current_day_name   = NULL;
 char current_day_number[3] = {0};
+char selected_cal_day_number[3] = {0};
 
 // @formatter:off
 State transition_table[NUM_STATES][NUM_EVENTS] = {
 
-    /*                    evt_btn_today | evt_btn_month | evt_btn_year | evt_btn_graph
+    /*                    evt_btn_today | evt_btn_month | evt_btn_year | evt_btn_graph | evt_btn_cal_day
      */
-    [STATE_ROOT_TODAY] = {INVALID_STATE, STATE_MONTH, STATE_YEAR, STATE_GRAPH},
-    [STATE_MONTH]      = {STATE_ROOT_TODAY, INVALID_STATE, STATE_YEAR, STATE_GRAPH},
-    [STATE_YEAR]       = {STATE_ROOT_TODAY, STATE_MONTH, INVALID_STATE, STATE_GRAPH},
-    [STATE_GRAPH]      = {STATE_ROOT_TODAY, STATE_MONTH, STATE_YEAR, INVALID_STATE},
+    [STATE_ROOT_TODAY] = {INVALID_STATE,    STATE_MONTH,   STATE_YEAR,    STATE_GRAPH,   INVALID_STATE},
+    [STATE_MONTH]      = {STATE_ROOT_TODAY, INVALID_STATE, STATE_YEAR,    STATE_GRAPH,   STATE_CAL_DAY},
+    [STATE_YEAR]       = {STATE_ROOT_TODAY, STATE_MONTH,   INVALID_STATE, STATE_GRAPH,   STATE_CAL_DAY},
+    [STATE_GRAPH]      = {STATE_ROOT_TODAY, STATE_MONTH,   STATE_YEAR,    INVALID_STATE, INVALID_STATE},
+    [STATE_CAL_DAY]    = {STATE_ROOT_TODAY, STATE_MONTH,   STATE_YEAR,    STATE_GRAPH,   INVALID_STATE},
 
 };
 // @formatter:off
@@ -91,10 +317,11 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
 
   time_t now = time(NULL);
   struct tm *tm_now = localtime(&now);
-  snprintf(current_day_number, sizeof(current_day_number), "%u",
-           tm_now->tm_mday);
+
+  snprintf(current_day_number, sizeof(current_day_number), "%u", tm_now->tm_mday);
+
   uint8_t current_week_day = (uint8_t)tm_now->tm_wday;
-  uint8_t current_month = (uint8_t)tm_now->tm_mon;
+  current_month = (uint8_t)tm_now->tm_mon;
   current_month_name = month[current_month];
   current_day_name = daysOfWeek[current_week_day];
   uint8_t day = 1;
@@ -102,17 +329,12 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
   static int map_state_root_today[SIZE_ROWS][SIZE_COLS] = {
       {TOGGLE_GROUP },
       {ELMNT_BLANK},
-      {ELMNT_BLANK,ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_MONTH,ELMNT_BLANK, ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
-      {ELMNT_BLANK},
-      {ELMNT_BLANK},
-      {ELMNT_BLANK},
-      {ELMNT_BLANK},
-      {ELMNT_BLANK},
-      {ELMNT_BLANK},    
-      {ELMNT_BLANK},
-      {ELMNT_BLANK},
-      {ELMNT_BLANK},
-      };
+      {ELMNT_BLANK,ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_MONTH,ELMNT_BLANK, 
+       ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
+      {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},
+      {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},   
+      {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},
+ };
   
   static int map_state_month[SIZE_ROWS][SIZE_COLS] = {
       {
@@ -120,17 +342,12 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
       },
           {ELMNT_BLANK},
       {
-          ELMNT_BLANK,
-          ELMNT_BLANK,
-          ELMNT_BLANK,
-          ELMNT_BLANK,
-          ELMNT_BLANK,
-          ELMNT_BLANK,
-          ELMNT_MONTH,
+          ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_MONTH,
       },
-        {ELMNT_BLANK},
-        { ELMNT_BLANK, ELMNT_BLANK,ELMNT_BLANK, ELMNT_SUNDAY, ELMNT_MONDAY, ELMNT_TUESDAY, ELMNT_WEDNESDAY, ELMNT_THURSDAY, ELMNT_FRIDAY, ELMNT_SATURDAY},
-         {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},{ELMNT_BLANK},{ELMNT_BLANK},{ELMNT_BLANK},
+      {ELMNT_BLANK},
+     { ELMNT_BLANK, ELMNT_BLANK,ELMNT_BLANK, ELMNT_SUNDAY, ELMNT_MONDAY, ELMNT_TUESDAY,
+       ELMNT_WEDNESDAY, ELMNT_THURSDAY, ELMNT_FRIDAY, ELMNT_SATURDAY},
+     {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},{ELMNT_BLANK},{ELMNT_BLANK},{ELMNT_BLANK},
   };
 
   static int map_state_year[SIZE_ROWS][SIZE_COLS] = {
@@ -144,6 +361,17 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
           TOGGLE_GROUP,
       },
   };
+
+ static int  map_state_cal_day[SIZE_ROWS][SIZE_COLS] = {
+      {TOGGLE_GROUP },
+      {ELMNT_BLANK},
+      {ELMNT_BLANK,ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_SELECTED_CAL_MONTH,ELMNT_BLANK,
+       ELMNT_SELECTED_CAL_DAY, ELMNT_BLANK, ELMNT_SELECTED_CAL_DAY_NUMBER},
+      {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},    
+      {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},
+ };
+
+
   switch (state) {
   case STATE_ROOT_TODAY:
     return &map_state_root_today;
@@ -169,6 +397,9 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
   case STATE_GRAPH:
     return &map_state_graph;
 
+  case STATE_CAL_DAY:
+    return &map_state_cal_day;
+
   case INVALID_STATE:
     break;
   case NUM_STATES:;
@@ -181,10 +412,6 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
 
 void grid_layout(JournalC99 *journalC99)
 {
-//  extern char *current_month_name;
-// extern char *current_day_name;
-//  extern char current_day_number[3];
-
   const float width = (float)GetScreenWidth();
   const float height = (float)GetScreenHeight();
   const float cell_width = width / GRID_COLS;
@@ -202,6 +429,7 @@ void grid_layout(JournalC99 *journalC99)
        const float cell_x =(float) col * cell_width;
        const float cell_y =(float) row * cell_height;
        const Rectangle cell = {cell_x, cell_y, cell_width, cell_height};
+
        switch ((*map)[row][col]) {
          case TOGGLE_GROUP:
           GuiToggleGroup((Rectangle){cell.x, cell.y, cell.width, cell.height}, "TODAY;MONTH;YEAR;GRAPH", &temp);
@@ -219,11 +447,16 @@ void grid_layout(JournalC99 *journalC99)
           break;
 
       case ELMNT_CAL_DAY:
-        if (GuiButton((Rectangle){cell.x, cell.y,cell.width-(cell.width*0.05F),cell.height-(cell_height*0.05F)}, TextFormat("%d", i++)))
-
+        if (GuiButton((Rectangle){cell.x, cell.y, cell.width-(cell.width*0.05F),
+                       cell.height-(cell_height*0.05F)}, TextFormat("%d", i)))
         {
-          Update_State(journalC99, evt_btn_today);
+          snprintf(selected_cal_day_number, sizeof(i), "%u", i);
+          journalC99->context.selected_cal_month= current_month_name;
+          journalC99->context.selected_cal_day=days_of_week_year_2025[(offset_days_in_month[current_month] - 2 )  + i ];
+          journalC99->context.selected_cal_day_number=selected_cal_day_number;
+          Update_State(journalC99, evt_btn_cal_day);
         }
+        i++;
         break;
 
       case ELMNT_SUNDAY:
@@ -265,8 +498,21 @@ void grid_layout(JournalC99 *journalC99)
         break;
 
       case ELMNT_CURR_DAY_NUMBER:
-        DrawText(current_day_number, (int)cell.x, (int)cell.y, font_size, font_color);
+        DrawText(current_day_number, (int)cell.x+cell_width, (int)cell.y, font_size, font_color);
         break;
+
+      case ELMNT_SELECTED_CAL_MONTH:
+        DrawText(journalC99->context.selected_cal_month, (int)cell.x, (int)cell.y, font_size, font_color);
+        break;
+
+       case ELMNT_SELECTED_CAL_DAY:
+        DrawText(journalC99->context.selected_cal_day, (int)cell.x-(int)cell_width/2, (int)cell.y, font_size, font_color);
+        break;
+
+       case ELMNT_SELECTED_CAL_DAY_NUMBER:
+        DrawText(journalC99->context.selected_cal_day_number, (int)cell.x+cell_width, (int)cell.y, font_size, font_color);
+        break;
+
       default:
         break;
       }
