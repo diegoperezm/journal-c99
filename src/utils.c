@@ -5,6 +5,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <sys/types.h>
 #include <time.h>
 
@@ -287,6 +288,12 @@ char *current_day_name   = NULL;
 char current_day_number[3] = {0};
 char selected_cal_day_number[3] = {0};
 
+int dropdownActive = 0;        
+bool dropdownEditMode = false; 
+
+TimeValue startTime = {0, 0};   // 00:00
+TimeValue endTime = {00, 00};   // 17:30
+
 // @formatter:off
 State transition_table[NUM_STATES][NUM_EVENTS] = {
 
@@ -308,7 +315,7 @@ State Update_State(JournalC99 *journalC99, Event event)
                         ? transition_table[currentState][event]
                         : currentState;
 
-  printf("|%10s|%10s|%10s|\n", state_name[currentState], event_name[event], state_name[nextState]);
+  printf("| %10s | %10s | %10s |\n", state_name[currentState], event_name[event], state_name[nextState]);
   return journalC99->currentState = nextState;
 }
 
@@ -329,11 +336,14 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
   static int map_state_root_today[SIZE_ROWS][SIZE_COLS] = {
       {TOGGLE_GROUP },
       {ELMNT_BLANK},
-      {ELMNT_BLANK,ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_MONTH,ELMNT_BLANK, 
-       ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
-      {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},
+      {ELMNT_BLANK,ELMNT_BLANK, ELMNT_BLANK, ELMNT_MONTH,ELMNT_BLANK, ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK,  ELMNT_TITLE_PROYECT,  ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_TITLE_START, ELMNT_BLANK,  ELMNT_BLANK, ELMNT_TITLE_END,},
+      {ELMNT_BLANK,  ELMNT_SELECT_PROYECT, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_START_TIME_HOURS, ELMNT_START_TIME_MINUTES,
+       ELMNT_BLANK,ELMNT_END_TIME_HOURS, ELMNT_END_TIME_MINUTES}, 
+
       {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},   
-      {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},
+      {ELMNT_BLANK}, {ELMNT_BLANK},
  };
   
   static int map_state_month[SIZE_ROWS][SIZE_COLS] = {
@@ -511,6 +521,41 @@ void grid_layout(JournalC99 *journalC99)
 
        case ELMNT_SELECTED_CAL_DAY_NUMBER:
         DrawText(journalC99->context.selected_cal_day_number, (int)cell.x+cell_width, (int)cell.y, font_size, font_color);
+        break;
+     
+      case ELMNT_SELECT_PROYECT:
+        if (GuiDropdownBox((Rectangle){cell.x, cell.y, cell.width*3, cell.height},
+           "Project 1;Project 2;Project 3;Project 4", &dropdownActive, dropdownEditMode)) {
+            dropdownEditMode = !dropdownEditMode;
+        }
+        break;
+
+      case ELMNT_TITLE_PROYECT: 
+         DrawText("Name", cell.x, cell.y,(int)font_size/2, GRAY);
+         break;
+
+      case ELMNT_TITLE_START: 
+         DrawText("Start   hh : mm",cell.x, cell.y,(int)font_size/2, GRAY);
+         break;
+
+      case ELMNT_START_TIME_HOURS: 
+         GuiSpinner((Rectangle){cell.x, cell.y, cell.width-(cell.width*0.08F), cell.height}, NULL, &startTime.hours, 0, 23, false);
+        break;
+      case ELMNT_START_TIME_MINUTES: 
+         GuiSpinner((Rectangle){cell.x, cell.y, cell.width, cell.height}, NULL, &startTime.minutes, 0, 59, false);
+         break;
+
+      case ELMNT_TITLE_END: 
+         DrawText("End     hh : mm",cell.x, cell.y,(int)font_size/2, GRAY);
+         break;
+
+      case ELMNT_END_TIME_HOURS: 
+        GuiSpinner((Rectangle){cell.x, cell.y, cell.width-(cell.width*0.08F),  cell.height}, NULL, &endTime.hours, 0, 23, false);
+        break;
+
+      case ELMNT_END_TIME_MINUTES: 
+        GuiSpinner((Rectangle){cell.x, cell.y, cell.width-(cell.width*0.08F),  cell.height}, NULL, &endTime.minutes, 0, 59, false);
+
         break;
 
       default:

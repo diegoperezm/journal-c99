@@ -47,6 +47,10 @@ typedef enum
 } Event;
 #undef X
 
+typedef struct {
+    int hours;
+    int minutes;
+} TimeValue;
 
 extern char *state_name[];
 extern char *event_name[];
@@ -82,6 +86,14 @@ typedef struct
   X(ELMNT_SELECTED_CAL_MONTH)                                                  \
   X(ELMNT_SELECTED_CAL_DAY)                                                    \
   X(ELMNT_SELECTED_CAL_DAY_NUMBER)                                             \
+  X(ELMNT_SELECT_PROYECT)                                                      \
+  X(ELMNT_START_TIME_HOURS)                                                    \
+  X(ELMNT_START_TIME_MINUTES)                                                  \
+  X(ELMNT_END_TIME_HOURS)                                                      \
+  X(ELMNT_END_TIME_MINUTES)                                                    \
+  X(ELMNT_TITLE_PROYECT)                                                       \
+  X(ELMNT_TITLE_START)                                                       \
+  X(ELMNT_TITLE_END)                                                       \
   X(ELMNT_NUM)
 
 #define X(element) element,
