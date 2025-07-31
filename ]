@@ -571,12 +571,15 @@ void grid_layout(JournalC99 *journalC99)
         break;
      
       case ELMNT_SELECT_PROYECT:
-        if (GuiDropdownBox((Rectangle){cell.x, cell.y, cell.width*3, cell.height-(cell_height*0.09F)},
+           if (GuiDropdownBox((Rectangle){cell.x, cell.y, cell.width*3, cell.height-(cell_height*0.09F)},
            "Project 1;Project 2;Project 3;Project 4",
              &dropdown_active[dropdown_active_index],dropdown_edit_mode[dropdown_edit_mode_index])) {
              dropdown_edit_mode[dropdown_edit_mode_index] = !dropdown_edit_mode[dropdown_edit_mode_index];
-        }
+           }
 
+        //if(dropdown_edit_mode[dropdown_edit_mode_index]) {
+         //}
+        
         dropdown_active_index++; 
         dropdown_edit_mode_index++; 
         break;

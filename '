@@ -577,6 +577,10 @@ void grid_layout(JournalC99 *journalC99)
              dropdown_edit_mode[dropdown_edit_mode_index] = !dropdown_edit_mode[dropdown_edit_mode_index];
         }
 
+        if(dropdown_edit_mode[dropdown_edit_mode_index]) {
+           DrawRectangle(cell.x, cell.y, cell.width*3, cell.height*4, BLACK);
+        }
+
         dropdown_active_index++; 
         dropdown_edit_mode_index++; 
         break;
