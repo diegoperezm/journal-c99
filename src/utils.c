@@ -332,15 +332,18 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
 
   time_t now = time(NULL);
   struct tm *tm_now = localtime(&now);
-  int snp_result = snprintf(current_day_number, sizeof(current_day_number), "%u", tm_now->tm_mday);
+  int snp_result = snprintf(current_day_number, sizeof(current_day_number),
+                            "%u", tm_now->tm_mday);
 
- if( snp_result < 0 )
- {
-   printf("Error: current_day_number (snprintf");
- } else if (snp_result >= sizeof(current_day_number))
- {
-   printf("Buffer too small. Needed %d , had %zu\n", snp_result, sizeof(current_day_name));
- }
+  if (snp_result < 0)
+  {
+    printf("Error: current_day_number (snprintf");
+  }
+  else if (snp_result >= sizeof(current_day_number))
+  {
+    printf("Buffer too small. Needed %d , had %zu\n", snp_result,
+           sizeof(current_day_name));
+  }
 
   uint8_t current_week_day = (uint8_t)tm_now->tm_wday;
   current_month = (uint8_t)tm_now->tm_mon;
