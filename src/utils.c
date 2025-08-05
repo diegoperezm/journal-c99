@@ -349,43 +349,64 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
   uint8_t day = 1;
 
   static int map_state_root_today[SIZE_ROWS][SIZE_COLS] = {
-// TOGGLE GROUP
-     // {TOGGLE_GROUP},
-     // {ELMNT_BLANK},
-// Day info  
-      {ELMNT_BLANK,ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_MONTH,ELMNT_BLANK,
-       ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
+      // TOGGLE GROUP
+       {TOGGLE_GROUP},
+       {ELMNT_BLANK},
+      // Day info
+      {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,  ELMNT_MONTH, ELMNT_BLANK,
+       ELMNT_BLANK, ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
       {ELMNT_BLANK},
 
-// Project info  
-      {ELMNT_BLANK, ELMNT_TITLE_PROYECT,  ELMNT_BLANK, ELMNT_BLANK,
-       ELMNT_BLANK, ELMNT_TITLE_START, ELMNT_BLANK,  ELMNT_BLANK, ELMNT_TITLE_END,},
+      // Project info
+      {
+          ELMNT_BLANK,
+          ELMNT_TITLE_PROYECT,
+          ELMNT_BLANK,
+          ELMNT_BLANK,
+          ELMNT_BLANK,
+          ELMNT_TITLE_START,
+          ELMNT_BLANK,
+          ELMNT_BLANK,
+          ELMNT_TITLE_END,
+      },
 
-// Start: Project input
+      // Start: Project input
       {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
-       ELMNT_START_TIME_HOURS, ELMNT_START_TIME_MINUTES,
-       ELMNT_BLANK, ELMNT_END_TIME_HOURS, ELMNT_END_TIME_MINUTES},
-       {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
-       ELMNT_START_TIME_HOURS, ELMNT_START_TIME_MINUTES,
-       ELMNT_BLANK, ELMNT_END_TIME_HOURS, ELMNT_END_TIME_MINUTES},
-       {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
-       ELMNT_START_TIME_HOURS, ELMNT_START_TIME_MINUTES,
-       ELMNT_BLANK, ELMNT_END_TIME_HOURS, ELMNT_END_TIME_MINUTES},
-// End:  Project input
-};
+       ELMNT_START_TIME_HOURS, ELMNT_START_TIME_MINUTES, ELMNT_BLANK,
+       ELMNT_END_TIME_HOURS, ELMNT_END_TIME_MINUTES},
+      {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
+       ELMNT_START_TIME_HOURS, ELMNT_START_TIME_MINUTES, ELMNT_BLANK,
+       ELMNT_END_TIME_HOURS, ELMNT_END_TIME_MINUTES},
+      {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
+       ELMNT_START_TIME_HOURS, ELMNT_START_TIME_MINUTES, ELMNT_BLANK,
+       ELMNT_END_TIME_HOURS, ELMNT_END_TIME_MINUTES},
+      // End:  Project input
+  };
 
   static int map_state_month[SIZE_ROWS][SIZE_COLS] = {
       {
           TOGGLE_GROUP,
       },
-          {ELMNT_BLANK},
+      {ELMNT_BLANK},
       {
-          ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_MONTH,
+          ELMNT_BLANK,
+          ELMNT_BLANK,
+          ELMNT_BLANK,
+          ELMNT_BLANK,
+          ELMNT_BLANK,
+          ELMNT_BLANK,
+          ELMNT_MONTH,
       },
       {ELMNT_BLANK},
-     { ELMNT_BLANK, ELMNT_BLANK,ELMNT_BLANK, ELMNT_SUNDAY, ELMNT_MONDAY, ELMNT_TUESDAY,
-       ELMNT_WEDNESDAY, ELMNT_THURSDAY, ELMNT_FRIDAY, ELMNT_SATURDAY},
-     {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},{ELMNT_BLANK},{ELMNT_BLANK},{ELMNT_BLANK},
+      {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_SUNDAY, ELMNT_MONDAY,
+       ELMNT_TUESDAY, ELMNT_WEDNESDAY, ELMNT_THURSDAY, ELMNT_FRIDAY,
+       ELMNT_SATURDAY},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
   };
 
   static int map_state_year[SIZE_ROWS][SIZE_COLS] = {
@@ -400,46 +421,27 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
       },
   };
 
- static int  map_state_cal_day[SIZE_ROWS][SIZE_COLS] = {
-      {TOGGLE_GROUP },
+  static int map_state_cal_day[SIZE_ROWS][SIZE_COLS] = {
+      {TOGGLE_GROUP},
       {ELMNT_BLANK},
-      {ELMNT_BLANK,ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_SELECTED_CAL_MONTH,ELMNT_BLANK,
-       ELMNT_SELECTED_CAL_DAY, ELMNT_BLANK, ELMNT_SELECTED_CAL_DAY_NUMBER},
-      {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},    
-      {ELMNT_BLANK}, {ELMNT_BLANK}, {ELMNT_BLANK},
- };
+      {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
+       ELMNT_SELECTED_CAL_MONTH, ELMNT_BLANK, ELMNT_SELECTED_CAL_DAY,
+       ELMNT_BLANK, ELMNT_SELECTED_CAL_DAY_NUMBER},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+      {ELMNT_BLANK},
+  };
 
-  const int offset_row_t = 5;
-  const int offset_col_t = 1;
-  const int offset_s_col_hours_t = 5;
-  const int offset_s_col_minutes_t = 6;
-  const int offset_e_col_hours_t = 8;
-  const int offset_e_col_minutes_t = 9;
-
-  switch (state) {
+  switch (state)
+  {
   case STATE_ROOT_TODAY:
-    /*
-   for(size_t i=0; i<3; i++) {
-    for(size_t j=0; j<1; j++) {
-      map_state_root_today[i+offset_row_t][j+offset_col_t] = ELMNT_SELECT_PROJECT;
-     //map_state_root_today[i+offset_row_t][j+offset_s_col_hours_t]   = ELMNT_START_TIME_HOURS;
-     //map_state_root_today[i+offset_row_t][j+offset_s_col_minutes_t] = ELMNT_START_TIME_MINUTES;
-     //map_state_root_today[i+offset_row_t][j+offset_e_col_hours_t]   = ELMNT_END_TIME_HOURS;
-     //map_state_root_today[i+offset_row_t][j+offset_e_col_minutes_t] = ELMNT_END_TIME_MINUTES;
-      }
-    }
-   /*
-for (int i=0; i<SIZE_ROWS; i++)
-{
- for (int j=0; j<SIZE_COLS; j++)
- {
-    printf("%d ", map_state_root_today[i][j]);
- }
-  printf("\n");
-}
-    printf("\n");
-*/
-    return &map_state_root_today;
+   return &map_state_root_today;
 
   case STATE_MONTH:
     for (int i = 0; i < 5; ++i)
@@ -451,7 +453,7 @@ for (int i=0; i<SIZE_ROWS; i++)
 
         if (i == 0 && j < first_day_in_month[current_month])
           continue;
-        map_state_month[i+offset_row][j+offset_col] = ELMNT_CAL_DAY;
+        map_state_month[i + offset_row][j + offset_col] = ELMNT_CAL_DAY;
         day++;
       }
     }
@@ -475,7 +477,6 @@ for (int i=0; i<SIZE_ROWS; i++)
   return &map;
 }
 
-
 void grid_layout(JournalC99 *journalC99)
 {
   const float width = (float)GetScreenWidth();
@@ -483,206 +484,259 @@ void grid_layout(JournalC99 *journalC99)
   const float cell_width = width / GRID_COLS;
   const float cell_height = height / GRID_ROWS;
   const Color font_color = GetColor(GuiGetStyle(0, 2));
-  const int font_size = (int)(cell_width*0.5F);
-  const int font_size_week_day = (int)(font_size/2);
+  const int font_size = (int)(cell_width * 0.5F);
+  const int font_size_week_day = (int)(font_size / 2);
 
   int(*map)[SIZE_ROWS][SIZE_COLS] = Return_Map_Pr(journalC99->currentState);
 
   int cal_day_index = 1;
-  int start_time_index_hours= 0;
-  int start_time_index_minutes= 0;
+  int start_time_index_hours = 0;
+  int start_time_index_minutes = 0;
 
-  int end_time_index_hours= 0;
-  int end_time_index_minutes= 0;
-
+  int end_time_index_hours = 0;
+  int end_time_index_minutes = 0;
+  const char *project_list = "Project A;Project B; Project C";
   int temp = journalC99->currentState;
 
- int Mmap[SIZE_ROWS][SIZE_COLS] = {
-   {0},
-   {ELMNT_BLANK,ELMNT_SELECT_PROJECT, },
-   {ELMNT_BLANK,ELMNT_SELECT_PROJECT_A},
-  {ELMNT_BLANK,ELMNT_SELECT_PROJECT_B}
- };
+  // TODO: Fix overlapping issue (GuiDropdownBox) - current solution is a hack.
+  int temp_map_projects[SIZE_ROWS][SIZE_COLS] = {
+    {0},
+    {0},
+    {0},
+      {
+          ELMNT_BLANK,
+          ELMNT_SELECT_PROJECT,
+      },
+      {ELMNT_BLANK, ELMNT_SELECT_PROJECT_A},
+      {ELMNT_BLANK, ELMNT_SELECT_PROJECT_B}};
 
-  for(int row=0;  row<SIZE_ROWS; row++)
+  // TODO: Fix overlapping issue (GuiDropdownBox) - current solution is a hack.
+if (temp == STATE_ROOT_TODAY)
+{
+  for (int row = 0; row < SIZE_ROWS; row++)
   {
-    for(int col=0; col<SIZE_COLS; col++)
+    for (int col = 0; col < SIZE_COLS; col++)
     {
-      const float cell_x =(float) col * cell_width;
-      const float cell_y =(float) row * cell_height;
+      const float cell_x = (float)col * cell_width;
+      const float cell_y = (float)row * cell_height;
       const Rectangle cell = {cell_x, cell_y, cell_width, cell_height};
-      switch (Mmap[row][col])
+
+      switch (temp_map_projects[row][col])
       {
       case ELMNT_SELECT_PROJECT:
-        if (GuiDropdownBox((Rectangle){cell.x, cell.y+(cell.height*4), cell.width*3, cell.height-(cell_height*0.09F)},
-             "A;B;C;D",
-               &dropdown_active,dropdown_edit_mode)) {
+        GuiSetStyle(DROPDOWNBOX, TEXT_PADDING, 4);
+        if (GuiDropdownBox((Rectangle){cell.x, cell.y + (cell.height * 4),
+                                       cell.width * 3,
+                                       cell.height - (cell_height * 0.09F)},
+                           project_list, &dropdown_active, dropdown_edit_mode))
+        {
           GuiUnlock();
           dropdown_edit_mode = !dropdown_edit_mode;
-               }
+        }
         break;
 
       case ELMNT_SELECT_PROJECT_A:
-        if (GuiDropdownBox((Rectangle){cell.x, cell.y+(cell.height*2), cell.width*3, cell.height-(cell_height*0.09F)},
-             "E;F;H;I;J",
-               &dropdown_active_a,dropdown_edit_mode_a)) {
+        GuiSetStyle(DROPDOWNBOX, TEXT_PADDING, 4);
+        if (GuiDropdownBox(
+                (Rectangle){cell.x, cell.y + (cell.height * 2), cell.width * 3,
+                            cell.height - (cell_height * 0.09F)},
+                project_list, &dropdown_active_a, dropdown_edit_mode_a))
+        {
           GuiUnlock();
           dropdown_edit_mode_a = !dropdown_edit_mode_a;
-               }
+        }
         break;
 
       case ELMNT_SELECT_PROJECT_B:
-        if (GuiDropdownBox((Rectangle){cell.x, cell.y, cell.width*3, cell.height-(cell_height*0.09F)},
-             "K;L;M;N;O",
-               &dropdown_active_b,dropdown_edit_mode_b)) {
+        GuiSetStyle(DROPDOWNBOX, TEXT_PADDING, 4);
+        if (GuiDropdownBox((Rectangle){cell.x, cell.y, cell.width * 3,
+                                       cell.height - (cell_height * 0.09F)},
+                           project_list, &dropdown_active_b,
+                           dropdown_edit_mode_b))
+        {
           GuiUnlock();
           dropdown_edit_mode_b = !dropdown_edit_mode_b;
-               }
+        }
         break;
-        default:
+      default:
         break;
       }
     }
   }
+}
+  for (int row = 0; row < SIZE_ROWS; row++)
+  {
+    for (int col = 0; col < SIZE_COLS; col++)
+    {
+      const float cell_x = (float)col * cell_width;
+      const float cell_y = (float)row * cell_height;
+      const Rectangle cell = {cell_x, cell_y, cell_width, cell_height};
+      switch ((*map)[row][col])
+      {
+      case TOGGLE_GROUP:
+        GuiToggleGroup((Rectangle){cell.x, cell.y, cell.width, cell.height},
+                       "TODAY;MONTH;YEAR;GRAPH", &temp);
 
+        if (temp != journalC99->currentState)
+        {
+          /*
+          Event(temp):
+          order of EVENT_TABLE (utils.h)  and
+          GuiToggleGroup(..., "TODAY;MONTH;YEAR;GRAPH", ...);
+          should be the same.
+          */
+          Update_State(journalC99, (Event)temp);
+        }
 
+        break;
 
+      case ELMNT_CAL_DAY:
+        if (GuiButton((Rectangle){cell.x, cell.y,
+                                  cell.width - (cell.width * 0.05F),
+                                  cell.height - (cell_height * 0.05F)},
+                      TextFormat("%d", cal_day_index)))
+        {
 
+          int snp_result = snprintf(selected_cal_day_number,
+                                    sizeof(cal_day_index), "%u", cal_day_index);
+          if (snp_result < 0)
+          {
+            printf("Error selected_cal_day_number (snprintf)");
+          }
+          else if (snp_result >= sizeof(cal_day_index))
+          {
+            printf("Buffer too smal. Needed %d, had %zu\n", snp_result,
+                   sizeof(cal_day_index));
+          }
 
-  for(int row=0;  row<SIZE_ROWS; row++) {
-    for(int col=0; col<SIZE_COLS; col++) {
-       const float cell_x =(float) col * cell_width;
-       const float cell_y =(float) row * cell_height;
-       const Rectangle cell = {cell_x, cell_y, cell_width, cell_height};
-       switch ((*map)[row][col])
-       {
-       case TOGGLE_GROUP:
-         GuiToggleGroup((Rectangle){cell.x, cell.y, cell.width, cell.height}, "TODAY;MONTH;YEAR;GRAPH", &temp);
+          journalC99->context.selected_cal_month = current_month_name;
+          journalC99->context.selected_cal_day =
+              days_of_week_year_2025[(offset_days_in_month[current_month] - 2) +
+                                     cal_day_index];
+          journalC99->context.selected_cal_day_number = selected_cal_day_number;
+          Update_State(journalC99, evt_btn_cal_day);
+        }
+        cal_day_index++;
+        break;
 
-         if(temp != journalC99->currentState) {
-           /*
-           Event(temp):
-           order of EVENT_TABLE (utils.h)  and
-           GuiToggleGroup(..., "TODAY;MONTH;YEAR;GRAPH", ...);
-           should be the same.
-           */
-           Update_State(journalC99, (Event)temp);
-         }
+      case ELMNT_SUNDAY:
+        DrawText("Sun", (int)cell.x, (int)cell.y, font_size_week_day,
+                 font_color);
+        break;
 
-         break;
+      case ELMNT_MONDAY:
+        DrawText("Mon", (int)cell.x, (int)cell.y, font_size_week_day,
+                 font_color);
+        break;
 
-       case ELMNT_CAL_DAY:
-         if (GuiButton((Rectangle){cell.x, cell.y, cell.width-(cell.width*0.05F),
-                        cell.height-(cell_height*0.05F)}, TextFormat("%d", cal_day_index)))
-         {
+      case ELMNT_TUESDAY:
+        DrawText("Tue", (int)cell.x, (int)cell.y, font_size_week_day,
+                 font_color);
+        break;
 
-           int snp_result =  snprintf(selected_cal_day_number, sizeof(cal_day_index), "%u", cal_day_index);
-           if (snp_result < 0)
-           {
-             printf("Error selected_cal_day_number (snprintf)");
-           } else if (snp_result >= sizeof(cal_day_index))
-           {
-             printf("Buffer too smal. Needed %d, had %zu\n", snp_result,sizeof(cal_day_index) );
-           }
+      case ELMNT_WEDNESDAY:
+        DrawText("Wed", (int)cell.x, (int)cell.y, font_size_week_day,
+                 font_color);
+        break;
 
-           journalC99->context.selected_cal_month= current_month_name;
-           journalC99->context.selected_cal_day=days_of_week_year_2025[(offset_days_in_month[current_month] - 2 )  + cal_day_index];
-           journalC99->context.selected_cal_day_number=selected_cal_day_number;
-           Update_State(journalC99, evt_btn_cal_day);
-         }
-         cal_day_index++;
-         break;
+      case ELMNT_THURSDAY:
+        DrawText("Thu", (int)cell.x, (int)cell.y, font_size_week_day,
+                 font_color);
+        break;
+      case ELMNT_FRIDAY:
+        DrawText("Fri", (int)cell.x, (int)cell.y, font_size_week_day,
+                 font_color);
+        break;
+      case ELMNT_SATURDAY:
+        DrawText("Sat", (int)cell.x, (int)cell.y, font_size_week_day,
+                 font_color);
+        break;
 
-       case ELMNT_SUNDAY:
-         DrawText("Sun", (int)cell.x, (int)cell.y, font_size_week_day, font_color);
-         break;
+      case ELMNT_MONTH:
+        DrawText(current_month_name, (int)cell.x, (int)cell.y, font_size,
+                 font_color);
+        break;
 
-       case ELMNT_MONDAY:
-         DrawText("Mon", (int)cell.x, (int)cell.y, font_size_week_day, font_color);
-         break;
+      case ELMNT_TEXT:
+        DrawText(current_month_name, (int)cell.x, (int)cell.y, font_size,
+                 RAYWHITE);
+        break;
 
-       case ELMNT_TUESDAY:
-         DrawText("Tue", (int)cell.x, (int)cell.y, font_size_week_day, font_color);
-         break;
+      case ELMNT_CURR_DAY_NAME:
+        DrawText(current_day_name, (int)cell.x - ((int)cell_width / 2),
+                 (int)cell.y, font_size, font_color);
+        break;
 
-       case ELMNT_WEDNESDAY:
-         DrawText("Wed", (int)cell.x, (int)cell.y, font_size_week_day, font_color);
-         break;
+      case ELMNT_CURR_DAY_NUMBER:
+        DrawText(current_day_number, (int)cell.x + ((int)cell_width),
+                 (int)cell.y, font_size, font_color);
+        break;
 
-       case ELMNT_THURSDAY:
-         DrawText("Thu", (int)cell.x, (int)cell.y, font_size_week_day, font_color);
-         break;
-       case ELMNT_FRIDAY:
-         DrawText("Fri", (int)cell.x, (int)cell.y, font_size_week_day, font_color);
-         break;
-       case ELMNT_SATURDAY:
-         DrawText("Sat", (int)cell.x, (int)cell.y, font_size_week_day, font_color);
-         break;
+      case ELMNT_SELECTED_CAL_MONTH:
+        DrawText(journalC99->context.selected_cal_month, (int)cell.x,
+                 (int)cell.y, font_size, font_color);
+        break;
 
-       case ELMNT_MONTH:
-         DrawText(current_month_name, (int)cell.x, (int)cell.y, font_size, font_color);
-         break;
+      case ELMNT_SELECTED_CAL_DAY:
+        DrawText(journalC99->context.selected_cal_day,
+                 (int)cell.x - (int)cell_width / 2, (int)cell.y, font_size,
+                 font_color);
+        break;
 
-       case ELMNT_TEXT:
-         DrawText(current_month_name, (int)cell.x, (int)cell.y, font_size, RAYWHITE);
-         break;
+      case ELMNT_SELECTED_CAL_DAY_NUMBER:
+        DrawText(journalC99->context.selected_cal_day_number,
+                 (int)cell.x + ((int)cell_width), (int)cell.y, font_size,
+                 font_color);
+        break;
 
-       case ELMNT_CURR_DAY_NAME:
-         DrawText(current_day_name, (int)cell.x-((int)cell_width/2), (int)cell.y, font_size, font_color);
-         break;
+      case ELMNT_TITLE_PROYECT:
+        if (dropdown_edit_mode | dropdown_edit_mode_a | dropdown_edit_mode_b)
+          GuiLock();
+        DrawText("Name", (int)cell.x, (int)cell.y, (int)font_size / 2, GRAY);
+        break;
 
-       case ELMNT_CURR_DAY_NUMBER:
-         DrawText(current_day_number, (int)cell.x+((int)cell_width), (int)cell.y, font_size, font_color);
-         break;
+      case ELMNT_TITLE_START:
+        DrawText("Start [hh] [mm]", (int)cell.x, (int)cell.y,
+                 (int)font_size / 2, GRAY);
+        break;
 
-       case ELMNT_SELECTED_CAL_MONTH:
-         DrawText(journalC99->context.selected_cal_month, (int)cell.x, (int)cell.y, font_size, font_color);
-         break;
+      case ELMNT_START_TIME_HOURS:
+        GuiSpinner(
+            (Rectangle){cell.x, cell.y, cell.width - (cell.width * 0.09F),
+                        cell.height - (cell.width * 0.09F)},
+            NULL, &start_time[start_time_index_hours].hours, 0, 23, false);
+        start_time_index_hours++;
+        break;
 
-       case ELMNT_SELECTED_CAL_DAY:
-         DrawText(journalC99->context.selected_cal_day, (int)cell.x-(int)cell_width/2, (int)cell.y, font_size, font_color);
-         break;
+      case ELMNT_START_TIME_MINUTES:
+        GuiSetStyle(VALUEBOX, TEXT_SIZE, font_size/3);
+        GuiSpinner(
+            (Rectangle){cell.x, cell.y, cell.width - (cell.width * 0.09F),
+                        cell.height - (cell.width * 0.09F)},
+            NULL, &start_time[start_time_index_minutes].minutes, 0, 59, false);
+        start_time_index_minutes++;
+        break;
 
-       case ELMNT_SELECTED_CAL_DAY_NUMBER:
-         DrawText(journalC99->context.selected_cal_day_number, (int)cell.x+((int)cell_width), (int)cell.y, font_size, font_color);
-         break;
+      case ELMNT_TITLE_END:
+        DrawText("End [hh] [mm]", (int)cell.x, (int)cell.y, (int)font_size / 2,
+                 GRAY);
+        break;
 
-       case ELMNT_TITLE_PROYECT:
-         if(dropdown_edit_mode|  dropdown_edit_mode_a | dropdown_edit_mode_b) GuiLock();
-         DrawText("Name", (int)cell.x,(int) cell.y,(int)font_size/2, GRAY);
-         break;
+      case ELMNT_END_TIME_HOURS:
+        GuiSpinner((Rectangle){cell.x, cell.y,
+                               cell.width - (cell.width * 0.09F),
+                               cell.height - (cell.width * 0.09F)},
+                   NULL, &end_time[end_time_index_hours].hours, 0, 23, false);
+        end_time_index_hours++;
+        break;
 
-       case ELMNT_TITLE_START:
-         DrawText("Start [hh] [mm]",(int)cell.x,(int)cell.y,(int)font_size/2, GRAY);
-         break;
-
-       case ELMNT_START_TIME_HOURS:
-         GuiSpinner((Rectangle){cell.x, cell.y, cell.width-(cell.width*0.08F), cell.height-(cell.width*0.09F)},
-                   NULL, &start_time[start_time_index_hours].hours, 0, 23, false);
-         start_time_index_hours++;
-         break;
-
-       case ELMNT_START_TIME_MINUTES:
-         GuiSpinner((Rectangle){cell.x, cell.y, cell.width-(cell.width*0.08F), cell.height-(cell.width*0.09F)},
-                     NULL,  &start_time[start_time_index_minutes].minutes, 0, 59, false);
-         start_time_index_minutes++;
-         break;
-
-       case ELMNT_TITLE_END:
-         DrawText("End [hh] [mm]",(int)cell.x,(int)cell.y,(int)font_size/2, GRAY);
-         break;
-
-       case ELMNT_END_TIME_HOURS:
-         GuiSpinner((Rectangle){cell.x, cell.y, cell.width-(cell.width*0.08F),  cell.height-(cell.width*0.09F)},
-                     NULL,&end_time[end_time_index_hours].hours, 0, 23, false);
-         end_time_index_hours++;
-         break;
-
-       case ELMNT_END_TIME_MINUTES:
-         GuiSpinner((Rectangle){cell.x, cell.y, cell.width-(cell.width*0.08F),  cell.height-(cell.width*0.09F)},
-                    NULL,&end_time[end_time_index_minutes].minutes,  0, 59, false);
-         end_time_index_minutes++;
-         break;
+      case ELMNT_END_TIME_MINUTES:
+        GuiSpinner(
+            (Rectangle){cell.x, cell.y, cell.width - (cell.width * 0.09F),
+                        cell.height - (cell.width * 0.09F)},
+            NULL, &end_time[end_time_index_minutes].minutes, 0, 59, false);
+        end_time_index_minutes++;
+        break;
 
       default:
         break;
@@ -692,11 +746,12 @@ void grid_layout(JournalC99 *journalC99)
 
 } // grid layout
 
-void setup_raylib(void) {
+void setup_raylib(void)
+{
   const int screenW = 900;
   const int screenH = 600;
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);
   InitWindow(screenW, screenH, "Journal");
-  SetTargetFPS(10);
+  SetTargetFPS(30);
   GuiLoadStyleCyber();
 }
