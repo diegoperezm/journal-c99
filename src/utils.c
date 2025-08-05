@@ -260,7 +260,7 @@ uint16_t offset_days_in_month[12] = {
     120, // May
     151, // June
     182, // July
-    212, // August
+    211, // August
     243, // September
     273,// October 
     304,// November 
@@ -428,8 +428,8 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
   static int map_state_cal_day[SIZE_ROWS][SIZE_COLS] = {
       {TOGGLE_GROUP},
       {ELMNT_BLANK},
-      {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
-       ELMNT_SELECTED_CAL_MONTH, ELMNT_BLANK, ELMNT_SELECTED_CAL_DAY,
+      {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
+       ELMNT_SELECTED_CAL_MONTH, ELMNT_BLANK, ELMNT_BLANK, ELMNT_SELECTED_CAL_DAY,
        ELMNT_BLANK, ELMNT_SELECTED_CAL_DAY_NUMBER},
       {ELMNT_BLANK},
       {ELMNT_BLANK},
@@ -658,7 +658,7 @@ if (temp == STATE_ROOT_TODAY)
 
           journalC99->context.selected_cal_month = current_month_name;
           journalC99->context.selected_cal_day =
-              days_of_week_year_2025[(offset_days_in_month[current_month] - 2) +
+              days_of_week_year_2025[(offset_days_in_month[current_month]) +
                                      cal_day_index];
           journalC99->context.selected_cal_day_number = selected_cal_day_number;
           Update_State(journalC99, evt_btn_cal_day);
