@@ -96,6 +96,8 @@ typedef struct
   X(ELMNT_TITLE_PROYECT)                                                       \
   X(ELMNT_TITLE_START)                                                         \
   X(ELMNT_TITLE_END)                                                           \
+  X(ELMNT_TODAY_MESSAGE)                                                       \
+  X(ELMNT_TITLE_TODAY_MESSAGE)                                                       \
   X(ELMNT_NUM)
 
 #define X(element) element,
