@@ -39,12 +39,12 @@ target_compile_definitions(journal-c99 PRIVATE RAYGUI_IMPLEMENTATION)
 target_link_libraries(journal-c99 raylib)
 
 
-set(CMAKE_C_FLAGS_DEBUG "-std=c99 -g3 -Wall -Werror -Wconversion -Wdouble-promotion -fsanitize=address,undefined -Wno-unused-parameter -Wno-unused-function -Wno-sign-conversion")
+set(CMAKE_C_FLAGS_DEBUG "-g3 -Wall -Werror -Wconversion -Wdouble-promotion -fsanitize=address,undefined -Wno-unused-parameter -Wno-unused-function -Wno-sign-conversion")
 
-set(CMAKE_C_FLAGS_RELEASE "-std=c99")
+set(CMAKE_C_FLAGS_RELEASE "-O3")
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  set(EXECUTABLE_NAME "debug_journal-c99")
+  set(EXECUTABLE_NAME "debug")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
   set(EXECUTABLE_NAME "release_journal-c99")
 else() 
