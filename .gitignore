@@ -126,3 +126,6 @@ tags
 # Project
 build/
 .cache
+.idea
+.idea/*.xml
+./.idea
