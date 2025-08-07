@@ -359,23 +359,18 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
       // Day info
       {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,  ELMNT_MONTH, ELMNT_BLANK,
        ELMNT_BLANK, ELMNT_CURR_DAY_NAME, ELMNT_BLANK, ELMNT_CURR_DAY_NUMBER},
-      {ELMNT_BLANK},
 
-      // Project info
+      // Project
+      {ELMNT_BLANK,ELMNT_SELECT_PROJECT,  },
       {
-          ELMNT_BLANK,
-          ELMNT_TITLE_PROYECT,
-          ELMNT_BLANK,
-          ELMNT_BLANK,
-          ELMNT_BLANK,
-          ELMNT_TITLE_START,
-          ELMNT_BLANK,
-          ELMNT_BLANK,
-          ELMNT_TITLE_END,
+       ELMNT_BLANK, ELMNT_SELECT_PROJECT_A,
+       ELMNT_BLANK, ELMNT_TITLE_PROJECT, ELMNT_BLANK, ELMNT_BLANK,
+       ELMNT_BLANK, ELMNT_TITLE_START, ELMNT_BLANK,  ELMNT_TITLE_END,
       },
 
       // Start: Project input
-      {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
+      {ELMNT_BLANK, ELMNT_SELECT_PROJECT_B,
+       ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
        ELMNT_START_TIME_HOURS, ELMNT_START_TIME_MINUTES, ELMNT_BLANK,
        ELMNT_END_TIME_HOURS, ELMNT_END_TIME_MINUTES},
       {ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK, ELMNT_BLANK,
@@ -385,6 +380,11 @@ int (*Return_Map_Pr(const State state))[SIZE_ROWS][SIZE_COLS] {
        ELMNT_START_TIME_HOURS, ELMNT_START_TIME_MINUTES, ELMNT_BLANK,
        ELMNT_END_TIME_HOURS, ELMNT_END_TIME_MINUTES},
      // End:  Project input
+
+     {ELMNT_BLANK},
+     {ELMNT_BLANK, ELMNT_TITLE_TODAY_MESSAGE},
+     {ELMNT_BLANK, ELMNT_TODAY_MESSAGE},
+     {ELMNT_BLANK},
   };
 
   static int map_state_month[SIZE_ROWS][SIZE_COLS] = {
@@ -502,63 +502,40 @@ void grid_layout(JournalC99 *journalC99)
   const char *project_list = "Project A;Project B; Project C";
   int temp = journalC99->currentState;
 
-  // TODO: Fix overlapping issue (GuiDropdownBox) - current solution is a hack.
-  int temp_map_projects[SIZE_ROWS][SIZE_COLS] = {
-    {0},
-    {0},
-    {0},
-      {
-          ELMNT_BLANK,
-          ELMNT_SELECT_PROJECT,
-      },
-      {ELMNT_BLANK, ELMNT_SELECT_PROJECT_A},
-      {ELMNT_BLANK, ELMNT_SELECT_PROJECT_B},
-      {ELMNT_BLANK},
-      {ELMNT_BLANK},
-      {ELMNT_BLANK},
-      {ELMNT_BLANK, ELMNT_TITLE_TODAY_MESSAGE},
-      {ELMNT_BLANK, ELMNT_TODAY_MESSAGE},
-    } ;
 
-  // TODO: Fix overlapping issue (GuiDropdownBox) - current solution is a hack.
-  if (temp == STATE_ROOT_TODAY)
+  for (size_t row=0; row < SIZE_ROWS; row++)
   {
-    for (int row = 0; row < SIZE_ROWS; row++)
+    for (size_t col=0; col < SIZE_COLS; col++)
     {
-      for (int col = 0; col < SIZE_COLS; col++)
+      const float cell_x = (float)col * cell_width;
+      const float cell_y = (float)row * cell_height;
+      const Rectangle cell = {cell_x, cell_y, cell_width, cell_height};
+
+      switch ((*map)[row][col])
       {
-        const float cell_x = (float)col * cell_width;
-        const float cell_y = (float)row * cell_height;
-        const Rectangle cell = {cell_x, cell_y, cell_width, cell_height};
+      case ELMNT_TITLE_TODAY_MESSAGE:
+        DrawText("Comments:", (int)cell.x, (int)cell.y, (int)font_size / 2, GRAY);
+        break;
 
-        switch (temp_map_projects[row][col])
+      case ELMNT_TODAY_MESSAGE:
+        GuiSetStyle(TEXTBOX, BASE_COLOR_PRESSED,1);
+        if(GuiTextBox((Rectangle){cell.x, cell.y, cell.width*9,
+                        cell.height},
+                        elmnt_today_message_text,
+                        sizeof(elmnt_today_message_text),
+                        elmnt_today_message_edit_mode ))
         {
-        case ELMNT_TITLE_TODAY_MESSAGE:
-          DrawText("Comments:", (int)cell.x, (int)cell.y, (int)font_size / 2, GRAY);
-          break;
-
-        case ELMNT_TODAY_MESSAGE:
-          GuiSetStyle(TEXTBOX, BASE_COLOR_PRESSED,1);
-          if(GuiTextBox((Rectangle){cell.x, cell.y, cell.width*9,
-                                cell.height},
-                                elmnt_today_message_text,
-                                sizeof(elmnt_today_message_text),
-                                elmnt_today_message_edit_mode ))
-          {
-
-            elmnt_today_message_edit_mode = !elmnt_today_message_edit_mode ;
-          }
-          break;
-        default:
-          break;
+          elmnt_today_message_edit_mode = !elmnt_today_message_edit_mode ;
         }
+        break;
+
+      default:
+        break;
       }
     }
   }
 
   // TODO: Fix overlapping issue (GuiDropdownBox) - current solution is a hack.
-if (temp == STATE_ROOT_TODAY)
-{
   for (int row = 0; row < SIZE_ROWS; row++)
   {
     for (int col = 0; col < SIZE_COLS; col++)
@@ -567,7 +544,7 @@ if (temp == STATE_ROOT_TODAY)
       const float cell_y = (float)row * cell_height;
       const Rectangle cell = {cell_x, cell_y, cell_width, cell_height};
 
-      switch (temp_map_projects[row][col])
+      switch ((*map)[row][col])
       {
       case ELMNT_SELECT_PROJECT:
         GuiSetStyle(DROPDOWNBOX, TEXT_PADDING, 4);
@@ -604,12 +581,10 @@ if (temp == STATE_ROOT_TODAY)
           dropdown_edit_mode_b = !dropdown_edit_mode_b;
         }
         break;
-
-        default:
+       default:
         break;
       }
     }
-  }
 }
   for (int row = 0; row < SIZE_ROWS; row++)
   {

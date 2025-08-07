@@ -93,11 +93,11 @@ typedef struct
   X(ELMNT_START_TIME_MINUTES)                                                  \
   X(ELMNT_END_TIME_HOURS)                                                      \
   X(ELMNT_END_TIME_MINUTES)                                                    \
-  X(ELMNT_TITLE_PROYECT)                                                       \
+  X(ELMNT_TITLE_PROJECT)                                                       \
   X(ELMNT_TITLE_START)                                                         \
   X(ELMNT_TITLE_END)                                                           \
   X(ELMNT_TODAY_MESSAGE)                                                       \
-  X(ELMNT_TITLE_TODAY_MESSAGE)                                                       \
+  X(ELMNT_TITLE_TODAY_MESSAGE)                                                 \
   X(ELMNT_NUM)
 
 #define X(element) element,
